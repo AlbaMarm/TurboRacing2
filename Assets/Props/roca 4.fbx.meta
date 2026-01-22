@@ -3,12 +3,7 @@ guid: bb23f2b390216174f93af6733c4af415
 ModelImporter:
   serializedVersion: 24200
   internalIDToNameTable: []
-  externalObjects:
-  - first:
-      type: UnityEngine:Material
-      assembly: UnityEngine.CoreModule
-      name: Redrock
-    second: {fileID: 2100000, guid: bedd05411e3101146b268256ab3f93b2, type: 2}
+  externalObjects: {}
   materials:
     materialImportMode: 2
     materialName: 0

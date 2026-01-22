@@ -3,27 +3,7 @@ guid: 9c3f06ebcd5e2604793299d5e50f9373
 ModelImporter:
   serializedVersion: 24200
   internalIDToNameTable: []
-  externalObjects:
-  - first:
-      type: UnityEngine:Material
-      assembly: UnityEngine.CoreModule
-      name: quiver_tree_02
-    second: {fileID: 2100000, guid: a29d87dbd3b095a47a88d7d7a2b9d25f, type: 2}
-  - first:
-      type: UnityEngine:Texture2D
-      assembly: UnityEngine.CoreModule
-      name: quiver_tree_02_diff_8k
-    second: {fileID: 2800000, guid: c084d0b77bbd00a4d8278a1bb4178c9b, type: 3}
-  - first:
-      type: UnityEngine:Texture2D
-      assembly: UnityEngine.CoreModule
-      name: quiver_tree_02_nor_gl_8k
-    second: {fileID: 2800000, guid: a92a229e1531100409b87510654f2317, type: 3}
-  - first:
-      type: UnityEngine:Texture2D
-      assembly: UnityEngine.CoreModule
-      name: quiver_tree_02_rough_8k
-    second: {fileID: 2800000, guid: a725fe9f4e45d8a47b31a31242775da0, type: 3}
+  externalObjects: {}
   materials:
     materialImportMode: 2
     materialName: 0

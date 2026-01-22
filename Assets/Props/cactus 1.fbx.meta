@@ -3,17 +3,7 @@ guid: a9ecdb7580e3dcf40b24e91d7b9e9463
 ModelImporter:
   serializedVersion: 24200
   internalIDToNameTable: []
-  externalObjects:
-  - first:
-      type: UnityEngine:Material
-      assembly: UnityEngine.CoreModule
-      name: Cactusx3v1
-    second: {fileID: 2100000, guid: 0082223a3bdff41408b5c95427d98dd8, type: 2}
-  - first:
-      type: UnityEngine:Texture2D
-      assembly: UnityEngine.CoreModule
-      name: Cactusx3v1_BR
-    second: {fileID: 2800000, guid: 0568d283dc6723647befb01ba39b390e, type: 3}
+  externalObjects: {}
   materials:
     materialImportMode: 2
     materialName: 0

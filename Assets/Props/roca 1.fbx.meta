@@ -3,32 +3,7 @@ guid: 111f02cd024fd8c4d9ded739be46e65d
 ModelImporter:
   serializedVersion: 24200
   internalIDToNameTable: []
-  externalObjects:
-  - first:
-      type: UnityEngine:Material
-      assembly: UnityEngine.CoreModule
-      name: 3DModel_Custom
-    second: {fileID: 2100000, guid: 105fe83f60a133446810d2c62288b967, type: 2}
-  - first:
-      type: UnityEngine:Texture2D
-      assembly: UnityEngine.CoreModule
-      name: 3DModel_Custom
-    second: {fileID: 2800000, guid: ac3c4534af392a0419534d7a2921628f, type: 3}
-  - first:
-      type: UnityEngine:Texture2D
-      assembly: UnityEngine.CoreModule
-      name: 3DModel_Custom_Metallic
-    second: {fileID: 2800000, guid: 7593db9728af24b44afccc8012ee3f25, type: 3}
-  - first:
-      type: UnityEngine:Texture2D
-      assembly: UnityEngine.CoreModule
-      name: 3DModel_Custom_Normal
-    second: {fileID: 2800000, guid: f70ea7d82b1672e43941410e1398ef89, type: 3}
-  - first:
-      type: UnityEngine:Texture2D
-      assembly: UnityEngine.CoreModule
-      name: 3DModel_Custom_Roughness
-    second: {fileID: 2800000, guid: 0567a48ea98e3fa49a2c7df819f2df17, type: 3}
+  externalObjects: {}
   materials:
     materialImportMode: 2
     materialName: 0

@@ -1,0 +1,265 @@
+fileFormatVersion: 2
+guid: 4ab7639976af0a84ea854ca2b0e7e39c
+ModelImporter:
+  serializedVersion: 24200
+  internalIDToNameTable: []
+  externalObjects:
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Bark_1_Mat.001
+    second: {fileID: 2100000, guid: ffc5e6c7f1d6f73479f44fb44486e942, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Dead_Leaf_1_Mat.001
+    second: {fileID: 2100000, guid: ea40ec9137a76b2459e770d9ec0797aa, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Dead_Leaf_1_v2_Mat.001
+    second: {fileID: 2100000, guid: aff13e1630f4a7445b1e7f1a17cd12aa, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Dead_Leaf_1_v3_Mat.001
+    second: {fileID: 2100000, guid: df4c0e722775bbd4ab5ead8a4bfc7352, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Dead_Leaf_1_v4_Mat.001
+    second: {fileID: 2100000, guid: 0c811c7524e7d684cb21ae772c201799, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Dead_Leaf_2_Mat.001
+    second: {fileID: 2100000, guid: 4dfb1cc121566554abb4dd81458ec061, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Leaf_1_Mat.001
+    second: {fileID: 2100000, guid: 7528e90db8a2e6141aace4dc7ec7c4f8, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Leaf_1_v2_Mat.001
+    second: {fileID: 2100000, guid: 0d8d4eaedaa2d5747a194494969829ef, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Leaf_1_v3_Mat.001
+    second: {fileID: 2100000, guid: c0ab2eb1bba414a46a799820982336f0, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Leaf_1_v4_Mat.001
+    second: {fileID: 2100000, guid: 9cd45ece811fbe047ac2e6a2410a4ca4, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Leaf_2_Mat.001
+    second: {fileID: 2100000, guid: 8dbeaf5e4cc93f04ab736eb46ca8f6b9, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Leaf_2_v2_Mat.001
+    second: {fileID: 2100000, guid: 3e2f8dd93189e7e49adc1c32007bd35c, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Leaf_2_v3_Mat.001
+    second: {fileID: 2100000, guid: 2ca1547388dfec141bd06a07ef2ad932, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Leaf_2_v4_Mat.001
+    second: {fileID: 2100000, guid: 9f07bc7c36f96b648aed582bebf634e7, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Leaf_3_Mat.001
+    second: {fileID: 2100000, guid: 7ad9d2cc5cfe43642a7923504c0bbe2b, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Leaf_3_v2_Mat.001
+    second: {fileID: 2100000, guid: eb4a4e040c2706e4798c62fdb918dd43, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Leaf_3_v3_Mat.001
+    second: {fileID: 2100000, guid: 1c6bbb57fee7f0e4ca9e10e95e2e1b39, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Leaf_3_v4_Mat.001
+    second: {fileID: 2100000, guid: cd9b138348c96074ea1779ea4b8d276d, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Twig_Mat.001
+    second: {fileID: 2100000, guid: dfa5867948970014ca8b5061d5013a23, type: 2}
+  - first:
+      type: UnityEngine:Texture2D
+      assembly: UnityEngine.CoreModule
+      name: Bark_1_Normal
+    second: {fileID: 2800000, guid: 7c15c9180a910ec428e7caeb47d9dd6d, type: 3}
+  - first:
+      type: UnityEngine:Texture2D
+      assembly: UnityEngine.CoreModule
+      name: Dead_Leaf_1_Normal
+    second: {fileID: 2800000, guid: 804104689a616e4489244c5aca1f0284, type: 3}
+  - first:
+      type: UnityEngine:Texture2D
+      assembly: UnityEngine.CoreModule
+      name: Dead_Leaf_1_Opacity
+    second: {fileID: 2800000, guid: be2b6cd8c0093644a8c784fb434a41d8, type: 3}
+  - first:
+      type: UnityEngine:Texture2D
+      assembly: UnityEngine.CoreModule
+      name: Dead_Leaf_2_Normal
+    second: {fileID: 2800000, guid: 3542af8d35271cc43b65412b5e462022, type: 3}
+  - first:
+      type: UnityEngine:Texture2D
+      assembly: UnityEngine.CoreModule
+      name: Dead_Leaf_2_Opacity
+    second: {fileID: 2800000, guid: a9801fd60d035304c92edaffd7c6200c, type: 3}
+  - first:
+      type: UnityEngine:Texture2D
+      assembly: UnityEngine.CoreModule
+      name: Leaf_1_Normal
+    second: {fileID: 2800000, guid: 674496034f8764141801dc187280c490, type: 3}
+  - first:
+      type: UnityEngine:Texture2D
+      assembly: UnityEngine.CoreModule
+      name: Leaf_1_Opacity
+    second: {fileID: 2800000, guid: 77d6b0d847f5c124a906cfa85378f2fd, type: 3}
+  - first:
+      type: UnityEngine:Texture2D
+      assembly: UnityEngine.CoreModule
+      name: Leaf_2_Normal
+    second: {fileID: 2800000, guid: c3ca70e4eb19c3a40aa2a099f19d47f3, type: 3}
+  - first:
+      type: UnityEngine:Texture2D
+      assembly: UnityEngine.CoreModule
+      name: Leaf_2_Opacity
+    second: {fileID: 2800000, guid: 4a77d65bc74fa954b9c92e8345506a7e, type: 3}
+  - first:
+      type: UnityEngine:Texture2D
+      assembly: UnityEngine.CoreModule
+      name: Leaf_3_Normal
+    second: {fileID: 2800000, guid: 78a8b379d589e84498bef9aebfd03813, type: 3}
+  - first:
+      type: UnityEngine:Texture2D
+      assembly: UnityEngine.CoreModule
+      name: Leaf_3_Opacity
+    second: {fileID: 2800000, guid: cbe8abf1299d25f4caaa1b28a1913636, type: 3}
+  - first:
+      type: UnityEngine:Texture2D
+      assembly: UnityEngine.CoreModule
+      name: Twig_Normal
+    second: {fileID: 2800000, guid: 5b912e6007741394ea3103306eefeb6e, type: 3}
+  materials:
+    materialImportMode: 2
+    materialName: 0
+    materialSearch: 1
+    materialLocation: 1
+  animations:
+    legacyGenerateAnimations: 4
+    bakeSimulation: 0
+    resampleCurves: 1
+    optimizeGameObjects: 0
+    removeConstantScaleCurves: 0
+    motionNodeName: 
+    animationImportErrors: 
+    animationImportWarnings: 
+    animationRetargetingWarnings: 
+    animationDoRetargetingWarnings: 0
+    importAnimatedCustomProperties: 0
+    importConstraints: 0
+    animationCompression: 1
+    animationRotationError: 0.5
+    animationPositionError: 0.5
+    animationScaleError: 0.5
+    animationWrapMode: 0
+    extraExposedTransformPaths: []
+    extraUserProperties: []
+    clipAnimations: []
+    isReadable: 0
+  meshes:
+    lODScreenPercentages: []
+    globalScale: 1
+    meshCompression: 0
+    addColliders: 0
+    useSRGBMaterialColor: 1
+    sortHierarchyByName: 1
+    importPhysicalCameras: 1
+    importVisibility: 1
+    importBlendShapes: 1
+    importCameras: 1
+    importLights: 1
+    nodeNameCollisionStrategy: 1
+    fileIdsGeneration: 2
+    swapUVChannels: 0
+    generateSecondaryUV: 0
+    useFileUnits: 1
+    keepQuads: 0
+    weldVertices: 1
+    bakeAxisConversion: 0
+    preserveHierarchy: 0
+    skinWeightsMode: 0
+    maxBonesPerVertex: 4
+    minBoneWeight: 0.001
+    optimizeBones: 1
+    generateMeshLods: 0
+    meshLodGenerationFlags: 0
+    maximumMeshLod: -1
+    meshOptimizationFlags: -1
+    indexFormat: 0
+    secondaryUVAngleDistortion: 8
+    secondaryUVAreaDistortion: 15.000001
+    secondaryUVHardAngle: 88
+    secondaryUVMarginMethod: 1
+    secondaryUVMinLightmapResolution: 40
+    secondaryUVMinObjectScale: 1
+    secondaryUVPackMargin: 4
+    useFileScale: 1
+    strictVertexDataChecks: 0
+  tangentSpace:
+    normalSmoothAngle: 60
+    normalImportMode: 0
+    tangentImportMode: 3
+    normalCalculationMode: 4
+    legacyComputeAllNormalsFromSmoothingGroupsWhenMeshHasBlendShapes: 0
+    blendShapeNormalImportMode: 1
+    normalSmoothingSource: 0
+  referencedClips: []
+  importAnimation: 1
+  humanDescription:
+    serializedVersion: 3
+    human: []
+    skeleton: []
+    armTwist: 0.5
+    foreArmTwist: 0.5
+    upperLegTwist: 0.5
+    legTwist: 0.5
+    armStretch: 0.05
+    legStretch: 0.05
+    feetSpacing: 0
+    globalScale: 1
+    rootMotionBoneName: 
+    hasTranslationDoF: 0
+    hasExtraRoot: 0
+    skeletonHasParents: 1
+  lastHumanDescriptionAvatarSource: {instanceID: 0}
+  autoGenerateAvatarMappingIfUnspecified: 1
+  animationType: 2
+  humanoidOversampling: 1
+  avatarSetup: 0
+  addHumanoidExtraRootOnlyWhenUsingAvatar: 1
+  importBlendShapeDeformPercent: 1
+  remapMaterialsIfMaterialImportModeIsNone: 0
+  additionalBone: 0
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 

@@ -19,9 +19,11 @@ public class GestorEventos : MonoBehaviour, INetworkRunnerCallbacks
     //Input variables
     bool accelerationTriggerPressed = false;
     
-    public GameObject SpawnPoint;
+    public GameObject SpawnPoint1;
+    public GameObject SpawnPoint2;
 
-    public GameObject jugador;
+    public GameObject jugador1;
+    public GameObject jugador2;
     private InputData inputData;
     
     private ListaJugadoresController LJC;
@@ -155,13 +157,24 @@ public class GestorEventos : MonoBehaviour, INetworkRunnerCallbacks
     {
         if(runner.IsServer && SceneManager.GetActiveScene().buildIndex == 3)
         {
+            int numJugador = 1;
+
             foreach(PlayerRef pR in LJC.listaSJ[runner.SessionInfo].Keys.ToList())
             {
                 if (LJC.listaSJ[runner.SessionInfo][pR]==null)
                 {
-                    NetworkObject p = runner.Spawn(jugador, SpawnPoint.transform.position, Quaternion.identity, pR);
-                    LJC.listaSJ[runner.SessionInfo][pR] = p;
+                    if (numJugador == 1)
+                    {
+                        NetworkObject p = runner.Spawn(jugador1, SpawnPoint1.transform.position, Quaternion.identity, pR);
+                        LJC.listaSJ[runner.SessionInfo][pR] = p;
+                    }
+                    else
+                    {
+                        NetworkObject p = runner.Spawn(jugador2, SpawnPoint2.transform.position, Quaternion.identity, pR);
+                        LJC.listaSJ[runner.SessionInfo][pR] = p;
+                    }
                 }
+                numJugador++;
             }
         }
     }

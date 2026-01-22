@@ -16,6 +16,7 @@ public class CarControllerMulti : NetworkBehaviour
 
     private NetworkRigidbody3D rb;
     private float defaultRotationY;
+    private GameObject controlVR;
 
     void Start()
     {
@@ -27,12 +28,12 @@ public class CarControllerMulti : NetworkBehaviour
     {
         if (HasInputAuthority)
         {
-            GameObject controlVR = GameObject.FindGameObjectWithTag("ControlVR");
+            controlVR = GameObject.FindGameObjectWithTag("ControlVR");
 
             if (controlVR!=null)
             {
                 controlVR.transform.SetParent(this.transform);
-                controlVR.transform.position = this.transform.position + new Vector3(0, 0.4F, -0.1f);
+                controlVR.transform.position = this.transform.position;
             }
         }
 
@@ -44,13 +45,21 @@ public class CarControllerMulti : NetworkBehaviour
         */
     }
 
-    void FixedUpdate()
+    public override void FixedUpdateNetwork()
     {
+        if (HasInputAuthority && controlVR != null)
+        {
+            controlVR.transform.position = this.transform.position;
+        }
+
         if (HasStateAuthority)
         {
             if (GetInput(out InputData inputData))
             {
                 float targetSteeringAngle = (maxAngle * (inputData.knobValue)) * turnSpeed;
+
+                Debug.Log(inputData.knobValue);
+                Debug.Log(inputData.triggerPressed);
 
                 Quaternion targetRotation = Quaternion.Euler(0f, targetSteeringAngle + defaultRotationY, 0f);
                 rb.Rigidbody.MoveRotation(targetRotation);

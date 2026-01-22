@@ -9,7 +9,7 @@ EditorBuildSettings:
     path: Assets/Scenes/SampleScene.unity
     guid: 55daccc09a3b69647bbab145b54a3ab3
   - enabled: 0
-    path: Assets/Scenes/UI/WinLossScene.unity
+    path: Assets/Scenes/UI/WinScene.unity
     guid: 4e9fef26e6adb88479ad1b9834a32d94
   - enabled: 0
     path: Assets/Scenes/golfScene.unity

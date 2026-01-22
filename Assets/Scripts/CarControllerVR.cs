@@ -19,7 +19,6 @@ public class CarControllerVR : MonoBehaviour
 
     //Input variables
     bool accelerationTriggerPressed = false;
-    Quaternion rotationValue;
     float currentSteeringAngle;
 
     float defaultRotationY;
@@ -29,7 +28,7 @@ public class CarControllerVR : MonoBehaviour
     void Awake()
     {
         rb = GetComponent<Rigidbody>();
-        steeringWheel = rb.GetComponentInChildren<XRKnob>();
+        steeringWheel = GetComponentInChildren<XRKnob>();
         defaultRotationY = transform.rotation.y;
     }
 
@@ -65,7 +64,7 @@ public class CarControllerVR : MonoBehaviour
 
         currentSteeringAngle = targetSteeringAngle;
 
-        Quaternion targetRotation = Quaternion.Euler(0f, currentSteeringAngle + defaultRotationY, 0f);
+        Quaternion targetRotation = Quaternion.Euler(0f, targetSteeringAngle + defaultRotationY, 0f);
         transform.rotation = targetRotation;
 
         // Control de aceleración con gatillo

@@ -8,20 +8,19 @@ using static Unity.Collections.Unicode;
 
 public class CarControllerMulti : NetworkBehaviour
 {
-   
-    
-    public float maxSteeringAngle = 30f; 
-    public float motorForce = 1500f;     
-    public float maxSpeed = 20f;          
-
-    public float steeringAngle;
+    [Header("Car Stats")]
+    public float motorForce = 1500f;
+    public float maxSpeed = 20f;
+    public float turnSpeed = 1f;
+    public float maxAngle = 3600.0f;
 
     private NetworkRigidbody3D rb;
+    private float defaultRotationY;
 
     void Start()
     {
         rb = GetComponent<NetworkRigidbody3D>();
-
+        defaultRotationY = transform.rotation.y;
     }
 
     public override void Spawned()
@@ -37,10 +36,12 @@ public class CarControllerMulti : NetworkBehaviour
             }
         }
 
+        /*
         if(HasStateAuthority)
         {
             transform.Rotate(-90.0f, 0.0f, 0.0f, Space.World);
         }
+        */
     }
 
     void FixedUpdate()
@@ -49,21 +50,25 @@ public class CarControllerMulti : NetworkBehaviour
         {
             if (GetInput(out InputData inputData))
             {
+                float targetSteeringAngle = (maxAngle * (inputData.knobValue)) * turnSpeed;
 
-                steeringAngle = Mathf.Lerp(-maxSteeringAngle, maxSteeringAngle, inputData.knobValue);
+                Quaternion targetRotation = Quaternion.Euler(0f, targetSteeringAngle + defaultRotationY, 0f);
+                rb.Rigidbody.MoveRotation(targetRotation);
 
-                Quaternion turnRotation = Quaternion.Euler(rb.Rigidbody.rotation.x, steeringAngle * 100 * Time.fixedDeltaTime, rb.Rigidbody.rotation.z);
-                rb.Rigidbody.MoveRotation(turnRotation);
-
-                
-
+                // Control de aceleración con gatillo
                 if (inputData.triggerPressed)
                 {
-                    if (rb.Rigidbody.linearVelocity.magnitude < maxSpeed)
-                    {
-                        rb.Rigidbody.AddForce((transform.forward * motorForce * Time.fixedDeltaTime) * 1);
-                    }
+                    rb.Rigidbody.AddForce((transform.forward * motorForce * Runner.DeltaTime) * 1);
                 }
+
+                // Limitar la velocidad máxima (en magnitud)
+                Vector3 horizontalVelocity = new Vector3(rb.Rigidbody.linearVelocity.x, 0, rb.Rigidbody.linearVelocity.z);
+                if (horizontalVelocity.magnitude > maxSpeed)
+                {
+                    horizontalVelocity = horizontalVelocity.normalized * maxSpeed;
+                    rb.Rigidbody.linearVelocity = new Vector3(horizontalVelocity.x, rb.Rigidbody.linearVelocity.y, horizontalVelocity.z);
+                }
+
             }
         }
 

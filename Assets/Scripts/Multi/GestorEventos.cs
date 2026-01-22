@@ -5,14 +5,20 @@ using System.Collections.Generic;
 using System.Linq;
 using Unity.VRTemplate;
 using UnityEngine;
+using UnityEngine.InputSystem;
 using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 using UnityEngine.XR;
 
 public class GestorEventos : MonoBehaviour, INetworkRunnerCallbacks
 {
-    public XRKnob steeringWheelKnob;
-    private InputDevice rightController;
+    [Header("Inputs")]
+    [SerializeField] InputActionReference rigthTrigger;
+    [SerializeField] XRKnob steeringWheel;
+
+    //Input variables
+    bool accelerationTriggerPressed = false;
+    
     public GameObject SpawnPoint;
 
     public GameObject jugador;
@@ -30,13 +36,31 @@ public class GestorEventos : MonoBehaviour, INetworkRunnerCallbacks
 
         inputData = new InputData();
 
-        // Obtener controlador derecho
-        var rightHandedControllers = new List<InputDevice>();
-        InputDevices.GetDevicesAtXRNode(XRNode.RightHand, rightHandedControllers);
-        if (rightHandedControllers.Count > 0)
-        {
-            rightController = rightHandedControllers[0];
-        }
+    }
+
+    private void OnEnable()
+    {
+        rigthTrigger.action.performed += CarAccelate;
+        rigthTrigger.action.canceled += CarAccelateStop;
+    }
+
+
+    private void OnDisable()
+    {
+        rigthTrigger.action.performed -= CarAccelate;
+        rigthTrigger.action.canceled -= CarAccelateStop;
+    }
+
+    private void CarAccelate(InputAction.CallbackContext context)
+    {
+        Debug.Log("Gatillo presionado");
+        accelerationTriggerPressed = true;
+    }
+
+    private void CarAccelateStop(InputAction.CallbackContext context)
+    {
+        Debug.Log("Gatillo soltado");
+        accelerationTriggerPressed = false;
     }
 
     public void OnConnectedToServer(NetworkRunner runner)
@@ -74,19 +98,13 @@ public class GestorEventos : MonoBehaviour, INetworkRunnerCallbacks
         inputData.triggerPressed = false;
         inputData.knobValue = 0.0f;
 
-        if(steeringWheelKnob!=null)
+        if(steeringWheel != null)
         {
-            inputData.knobValue = steeringWheelKnob.value;
+            inputData.knobValue = steeringWheel.value;
         }
 
-        if (rightController.isValid)
-        {
-            bool triggerPressed = false;
-            if (rightController.TryGetFeatureValue(CommonUsages.triggerButton, out triggerPressed) && triggerPressed)
-            {
-                inputData.triggerPressed = triggerPressed;
-            }
-        }
+        inputData.triggerPressed = accelerationTriggerPressed;
+
         input.Set(inputData);
     }
 

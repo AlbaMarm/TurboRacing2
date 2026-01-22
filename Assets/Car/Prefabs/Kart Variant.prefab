@@ -143,10 +143,6 @@ PrefabInstance:
       propertyPath: road.m_Bits
       value: 64
       objectReference: {fileID: 0}
-    - target: {fileID: 2815809832594683818, guid: ede64a988de7e7d42a21ac99ffbc2e04, type: 3}
-      propertyPath: steeringWheel
-      value: 
-      objectReference: {fileID: 8506667901830159569}
     - target: {fileID: 3263853158392564341, guid: ede64a988de7e7d42a21ac99ffbc2e04, type: 3}
       propertyPath: m_Mass
       value: 1
@@ -268,7 +264,9 @@ PrefabInstance:
       value: 8
       objectReference: {fileID: 0}
     m_RemovedComponents: []
-    m_RemovedGameObjects: []
+    m_RemovedGameObjects:
+    - {fileID: 6383829173983218511, guid: ede64a988de7e7d42a21ac99ffbc2e04, type: 3}
+    - {fileID: 1721929861332997540, guid: ede64a988de7e7d42a21ac99ffbc2e04, type: 3}
     m_AddedGameObjects:
     - targetCorrespondingSourceObject: {fileID: 4514798148664310449, guid: ede64a988de7e7d42a21ac99ffbc2e04, type: 3}
       insertIndex: -1
@@ -280,14 +278,3 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 4514798148664310449, guid: ede64a988de7e7d42a21ac99ffbc2e04, type: 3}
   m_PrefabInstance: {fileID: 1266511121784347883}
   m_PrefabAsset: {fileID: 0}
---- !u!114 &8506667901830159569 stripped
-MonoBehaviour:
-  m_CorrespondingSourceObject: {fileID: 7466489092549918778, guid: ede64a988de7e7d42a21ac99ffbc2e04, type: 3}
-  m_PrefabInstance: {fileID: 1266511121784347883}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: e888dc0064d84d041818fa202b52d6be, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::Unity.VRTemplate.XRKnob

@@ -58,8 +58,8 @@ public class CarControllerMulti : NetworkBehaviour
             {
                 float targetSteeringAngle = (maxAngle * (inputData.knobValue)) * turnSpeed;
 
-                Debug.Log(inputData.knobValue);
-                Debug.Log(inputData.triggerPressed);
+                //Debug.Log(inputData.knobValue);
+                //Debug.Log(inputData.triggerPressed);
 
                 Quaternion targetRotation = Quaternion.Euler(0f, targetSteeringAngle + defaultRotationY, 0f);
                 rb.Rigidbody.MoveRotation(targetRotation);

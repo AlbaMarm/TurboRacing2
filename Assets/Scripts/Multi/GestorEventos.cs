@@ -55,13 +55,13 @@ public class GestorEventos : MonoBehaviour, INetworkRunnerCallbacks
 
     private void CarAccelate(InputAction.CallbackContext context)
     {
-        Debug.Log("Gatillo presionado");
+        //Debug.Log("Gatillo presionado");
         accelerationTriggerPressed = true;
     }
 
     private void CarAccelateStop(InputAction.CallbackContext context)
     {
-        Debug.Log("Gatillo soltado");
+        //Debug.Log("Gatillo soltado");
         accelerationTriggerPressed = false;
     }
 

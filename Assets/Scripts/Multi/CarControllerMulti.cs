@@ -1,10 +1,12 @@
 using Fusion;
 using Fusion.Addons.Physics;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using Unity.VRTemplate;
 using UnityEngine;
 using UnityEngine.XR;
 using static Unity.Collections.Unicode;
+using UnityEngine.SceneManagement;
 
 public class CarControllerMulti : NetworkBehaviour
 {
@@ -79,6 +81,31 @@ public class CarControllerMulti : NetworkBehaviour
                 }
 
             }
+
+            /*
+            ReadOnlyDictionary<string, SessionProperty> ganador = Runner.SessionInfo.Properties;
+
+            if (ganador.TryGetValue("Ganador", out SessionProperty data))
+            {
+                int numGanador = (int)data.PropertyValue;
+                if (numGanador != 0 && Runner.LocalPlayer.IsRealPlayer)
+                {
+                    if(Runner.IsSceneAuthority && numGanador == Runner.LocalPlayer.AsIndex)
+                    {
+                        Debug.Log("gana");
+                        Runner.UnloadScene(Runner.SceneManager.GetSceneRef(SceneManager.GetSceneByBuildIndex(3).name));
+                        Runner.LoadScene(Runner.SceneManager.GetSceneRef(SceneManager.GetSceneByBuildIndex(4).name));
+                    }
+                    else
+                    {
+                        Runner.UnloadScene(SceneRef.FromIndex(3));
+                        Runner.LoadScene(SceneRef.FromIndex(5));
+                        Debug.Log("pierde");
+                    }
+                }
+            }*/
+            
+
         }
 
     }

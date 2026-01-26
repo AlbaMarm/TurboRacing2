@@ -27,12 +27,16 @@ public class InicioController : MonoBehaviour, INetworkRunnerCallbacks
 
     public async void Conectar()
     {
+        Dictionary<string, SessionProperty> propiedades = new Dictionary<string, SessionProperty>();
+        propiedades.Add("Ganador", (SessionProperty)0);
+
         StartGameArgs argumentos = new StartGameArgs();
         argumentos.GameMode = GameMode.AutoHostOrClient;
         argumentos.SessionName = "Carrera";
-        argumentos.PlayerCount = 2;
+        argumentos.PlayerCount = 1;
         argumentos.SceneManager = sceneManager;
         argumentos.Scene = SceneRef.FromIndex(SceneManager.GetActiveScene().buildIndex);
+        argumentos.SessionProperties = propiedades;
 
         await red.StartGame(argumentos);
 

@@ -2,6 +2,7 @@ using Fusion;
 using Fusion.Sockets;
 using System;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.Linq;
 using Unity.VRTemplate;
 using UnityEngine;
@@ -9,6 +10,7 @@ using UnityEngine.InputSystem;
 using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 using UnityEngine.XR;
+using static Unity.Collections.Unicode;
 
 public class GestorEventos : MonoBehaviour, INetworkRunnerCallbacks
 {
@@ -141,6 +143,30 @@ public class GestorEventos : MonoBehaviour, INetworkRunnerCallbacks
 
             LJC.listaSJ[runner.SessionInfo].Remove(player);
         }
+
+        /*
+        ReadOnlyDictionary<string, SessionProperty> ganador = runner.SessionInfo.Properties;
+
+        if (ganador.TryGetValue("Ganador", out SessionProperty data))
+        {
+            int numGanador = (int)data.PropertyValue;
+            if (numGanador != 0 && runner.LocalPlayer.IsRealPlayer)
+            {
+                if (runner.IsSceneAuthority && numGanador == runner.LocalPlayer.AsIndex)
+                {
+                    Debug.Log("gana");
+                    runner.UnloadScene(SceneRef.FromIndex(3));
+                    runner.LoadScene(SceneRef.FromIndex(4));
+                }
+                else
+                {
+                    runner.UnloadScene(SceneRef.FromIndex(3));
+                    runner.LoadScene(SceneRef.FromIndex(5));
+                    Debug.Log("pierde");
+                }
+            }
+        }
+        */
     }
     
     public void OnReliableDataProgress(NetworkRunner runner, PlayerRef player, ReliableKey key, float progress)

@@ -31,6 +31,8 @@ public class GestorEventos : MonoBehaviour, INetworkRunnerCallbacks
     private ListaJugadoresController LJC;
     private NetworkRunner red;
 
+    int numPlayerIn = 0;
+
     private void Awake()
     {
         red = FindAnyObjectByType<NetworkRunner>();
@@ -39,7 +41,7 @@ public class GestorEventos : MonoBehaviour, INetworkRunnerCallbacks
         LJC = FindAnyObjectByType<ListaJugadoresController>();
 
         inputData = new InputData();
-
+        numPlayerIn = 0;
     }
 
     private void OnEnable()
@@ -129,7 +131,8 @@ public class GestorEventos : MonoBehaviour, INetworkRunnerCallbacks
 
     public void OnPlayerJoined(NetworkRunner runner, PlayerRef player)
     {
-
+        numPlayerIn++;
+        Debug.Log($"Numero jugadores: {numPlayerIn}");
     }
 
     public void OnPlayerLeft(NetworkRunner runner, PlayerRef player)
@@ -143,10 +146,14 @@ public class GestorEventos : MonoBehaviour, INetworkRunnerCallbacks
 
             LJC.listaSJ[runner.SessionInfo].Remove(player);
         }
+        numPlayerIn--;
+        Debug.Log($"Numero jugadores: {numPlayerIn}");
+        if (numPlayerIn <= 0) runner.Shutdown();
 
-        
+
+
     }
-    
+
     public void OnReliableDataProgress(NetworkRunner runner, PlayerRef player, ReliableKey key, float progress)
     {
         

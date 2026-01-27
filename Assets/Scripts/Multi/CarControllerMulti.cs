@@ -117,11 +117,11 @@ public class CarControllerMulti : NetworkBehaviour
                 Debug.Log("pierde");
                 nextScene = 5;
             }
-            LeaveGame(nextScene);
+            LeaveGame(Runner.LocalPlayer, nextScene);
         }
     }
 
-    public async void LeaveGame(int nextScene)
+    /*public async void LeaveGame(int nextScene)
     {
         if (Runner != null)
         {
@@ -129,29 +129,9 @@ public class CarControllerMulti : NetworkBehaviour
         }
 
         SceneManager.LoadScene(nextScene);
-    }
+    }*/
 
-    /*
-    public void FinJuego(int numGanador)
-    {
-        if (numGanador != 0) //&& Runner.LocalPlayer.IsRealPlayer
-        {
-            int nextScene;
-            if (Runner.IsSceneAuthority && numGanador == Runner.LocalPlayer.AsIndex)
-            {
-                Debug.Log("gana");
-                nextScene = 4;
-            }
-            else
-            {
-                Debug.Log("pierde");
-                nextScene = 5;
-            }
-
-            // Llamar al RPC LeaveGame pasando la referencia al jugador local y la escena
-            LeaveGame(Runner.LocalPlayer, nextScene);
-        }
-    }
+    
 
     [Rpc(RpcSources.All, RpcTargets.StateAuthority)]
     public void LeaveGame(PlayerRef caller, int sceneIndex)
@@ -169,5 +149,5 @@ public class CarControllerMulti : NetworkBehaviour
         // Desconectar al jugador que llamó (si es necesario)
         Runner.Disconnect(caller);
     }
-     */
+    
 }

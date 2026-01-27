@@ -90,53 +90,22 @@ public class CarControllerMulti : NetworkBehaviour
 
             if (ganador.TryGetValue("Ganador", out SessionProperty data))
             {
-                FinJuego((int)data.PropertyValue);
-
+                int numGanador =(int)data.PropertyValue;
+                if (numGanador != 0)//&& Runner.LocalPlayer.IsRealPlayer
+                {
+                    Rpc_EndGame(Runner.LocalPlayer, numGanador);
+                }
             }
 
 
         }
 
     }
-
-    public void FinJuego(int numGanador)
-    {
-        if (numGanador != 0)//&& Runner.LocalPlayer.IsRealPlayer
-        {
-
-            int nextScene;
-            if (Runner.IsSceneAuthority && numGanador == Runner.LocalPlayer.AsIndex)
-            {
-                Debug.Log("gana");
-                nextScene = 4;
-                //Runner.UnloadScene(Runner.SceneManager.GetSceneRef(SceneManager.GetSceneByBuildIndex(3).name));
-                //Runner.LoadScene(Runner.SceneManager.GetSceneRef(SceneManager.GetSceneByBuildIndex(4).name));
-            }
-            else
-            {
-                Debug.Log("pierde");
-                nextScene = 5;
-            }
-            Rpc_LeaveGame(Runner.LocalPlayer, nextScene);
-        }
-    }
-
-    /*public async void LeaveGame(int nextScene)
-    {
-        if (Runner != null)
-        {
-            await Runner.Shutdown();
-        }
-
-        SceneManager.LoadScene(nextScene);
-    }*/
-
 
 
     [Rpc(RpcSources.StateAuthority, RpcTargets.All)]
-    public void Rpc_LeaveGame(PlayerRef caller, int sceneIndex)
+    public void Rpc_EndGame(PlayerRef caller, int numGanador)
     {
-        Debug.Log($"LeaveGame llamado por jugador {caller} para cargar escena {sceneIndex}");
 
         // Aquí puedes manejar la lógica en el servidor, por ejemplo:
         // - Cambiar escena sincronizadamente
@@ -145,6 +114,23 @@ public class CarControllerMulti : NetworkBehaviour
 
         // Ejemplo de carga de escena sincronizada
         //Runner.LoadScene(Runner.SceneManager.GetSceneRef(SceneManager.GetSceneByBuildIndex(sceneIndex).name));
+
+        int sceneIndex;
+        if (Runner.IsSceneAuthority && numGanador == Runner.LocalPlayer.AsIndex)
+        {
+            Debug.Log("gana");
+            sceneIndex = 4;
+            //Runner.UnloadScene(Runner.SceneManager.GetSceneRef(SceneManager.GetSceneByBuildIndex(3).name));
+            //Runner.LoadScene(Runner.SceneManager.GetSceneRef(SceneManager.GetSceneByBuildIndex(4).name));
+        }
+        else
+        {
+            Debug.Log("pierde");
+            sceneIndex = 5;
+        }
+
+        Debug.Log($"LeaveGame llamado por jugador {caller} para cargar escena {sceneIndex}");
+
         SceneManager.LoadScene(sceneIndex);
 
         // Desconectar al jugador que llamó (si es necesario)

@@ -130,4 +130,44 @@ public class CarControllerMulti : NetworkBehaviour
 
         SceneManager.LoadScene(nextScene);
     }
+
+    /*
+    public void FinJuego(int numGanador)
+    {
+        if (numGanador != 0) //&& Runner.LocalPlayer.IsRealPlayer
+        {
+            int nextScene;
+            if (Runner.IsSceneAuthority && numGanador == Runner.LocalPlayer.AsIndex)
+            {
+                Debug.Log("gana");
+                nextScene = 4;
+            }
+            else
+            {
+                Debug.Log("pierde");
+                nextScene = 5;
+            }
+
+            // Llamar al RPC LeaveGame pasando la referencia al jugador local y la escena
+            LeaveGame(Runner.LocalPlayer, nextScene);
+        }
+    }
+
+    [Rpc(RpcSources.All, RpcTargets.StateAuthority)]
+    public void LeaveGame(PlayerRef caller, int sceneIndex)
+    {
+        Debug.Log($"LeaveGame llamado por jugador {caller} para cargar escena {sceneIndex}");
+
+        // Aquí puedes manejar la lógica en el servidor, por ejemplo:
+        // - Cambiar escena sincronizadamente
+        // - Desconectar jugador
+        // - Otras acciones necesarias
+
+        // Ejemplo de carga de escena sincronizada
+        Runner.LoadScene(Runner.SceneManager.GetSceneRef(SceneManager.GetSceneByBuildIndex(sceneIndex).name));
+
+        // Desconectar al jugador que llamó (si es necesario)
+        Runner.Disconnect(caller);
+    }
+     */
 }

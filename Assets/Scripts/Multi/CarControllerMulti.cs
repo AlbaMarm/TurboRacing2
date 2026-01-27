@@ -1,6 +1,7 @@
 using Fusion;
 using Fusion.Addons.Physics;
 using System;
+using System.Collections;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using Unity.Android.Gradle.Manifest;
@@ -116,9 +117,17 @@ public class CarControllerMulti : NetworkBehaviour
                 Debug.Log("pierde");
                 nextScene = 5;
             }
-            SceneManager.LoadScene(nextScene);
-            Runner.Disconnect(Runner.LocalPlayer);
+            LeaveGame(nextScene);
         }
     }
 
+    public async void LeaveGame(int nextScene)
+    {
+        if (Runner != null)
+        {
+            await Runner.Shutdown();
+        }
+
+        SceneManager.LoadScene(nextScene);
+    }
 }

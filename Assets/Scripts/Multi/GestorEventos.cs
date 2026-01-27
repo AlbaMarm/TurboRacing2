@@ -137,6 +137,11 @@ public class GestorEventos : MonoBehaviour, INetworkRunnerCallbacks
 
     public void OnPlayerLeft(NetworkRunner runner, PlayerRef player)
     {
+        numPlayerIn--;
+        Debug.Log($"Numero jugadores: {numPlayerIn}");
+        if (numPlayerIn <= 0) runner.Shutdown();
+
+
         if (runner.IsServer && LJC.listaSJ[runner.SessionInfo].TryGetValue(player, out NetworkObject p))
         {
             if (p != null)
@@ -146,9 +151,7 @@ public class GestorEventos : MonoBehaviour, INetworkRunnerCallbacks
 
             LJC.listaSJ[runner.SessionInfo].Remove(player);
         }
-        numPlayerIn--;
-        Debug.Log($"Numero jugadores: {numPlayerIn}");
-        if (numPlayerIn <= 0) runner.Shutdown();
+
 
 
 

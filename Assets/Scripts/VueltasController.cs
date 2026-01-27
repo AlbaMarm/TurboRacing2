@@ -1,83 +1,147 @@
 ﻿using Fusion;
 using System.Collections;
+using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using TMPro;
 using UnityEngine;
 using UnityEngine.SceneManagement;
+using static Unity.Collections.Unicode;
 
 public class VueltasController : NetworkBehaviour
 {
     public TMP_Text textoContador;
+    public bool haChocado;
 
-    [Networked] public int contador { get; set; }
-    [Networked] private bool haChocado { get; set; }
+    [Networked]
+    public int contador { get; set; }
 
-    // 🔑 Ganador global (solo lo escribe el host)
-    [Networked] private PlayerRef ganador { get; set; }
+    private void Awake()
+    {
+        haChocado = false;
+    }
 
     public override void Spawned()
     {
         if (HasStateAuthority)
         {
+            Debug.Log("Player: " + Runner.LocalPlayer.AsIndex);
             contador = 1;
-            ganador = PlayerRef.None;
         }
     }
 
     public override void Render()
     {
-        textoContador.text = contador + "/3";
+        textoContador.text = contador.ToString() + "/3";
     }
 
-    private void OnTriggerEnter(Collider other)
+    public void OnTriggerEnter(Collider other)
     {
-        // ⚠️ Cada jugador cuenta SUS vueltas (InputAuthority)
-        if (!HasInputAuthority) return;
-
-        if (!haChocado && other.CompareTag("Meta"))
+        if (HasStateAuthority && haChocado == false && other.gameObject.CompareTag("Meta"))
         {
+            Debug.Log("choca");
             contador++;
             haChocado = true;
-            StartCoroutine(RecuperaChoque());
+            StartCoroutine("recuperaChoque");
+        }
+    }
 
-            Debug.Log($"Jugador {Object.InputAuthority.AsIndex} pasó meta. Vueltas: {contador}");
+    IEnumerator recuperaChoque()
+    {
+        yield return new WaitForSeconds(3);
+        if (haChocado)
+        {
+            haChocado = false;
+        }
+    }
 
-            if (contador >= 3)
+    public override void FixedUpdateNetwork()
+    {
+        if (HasStateAuthority && contador == 3)
+        {
+            ReadOnlyDictionary<string, SessionProperty> ganador = Runner.SessionInfo.Properties;
+
+            if (ganador.TryGetValue("Ganador", out SessionProperty data))
             {
-                Rpc_PlayerFinished(Object.InputAuthority);
+                int numGanador = (int)data.PropertyValue;
+                if (numGanador == 0 && Runner.LocalPlayer.IsRealPlayer)
+                {
+                    numGanador = Runner.LocalPlayer.AsIndex;
+                    Debug.Log(numGanador);
+                }
+                //Rpc_EndGame(Runner.LocalPlayer, numGanador);
+                Rpc_EndGame(numGanador);
             }
         }
     }
 
-    IEnumerator RecuperaChoque()
-    {
-        yield return new WaitForSeconds(3f);
-        haChocado = false;
-    }
-
-    // 🏁 El jugador avisa que terminó → SOLO HOST recibe esto
-    [Rpc(RpcSources.InputAuthority, RpcTargets.StateAuthority)]
-    private void Rpc_PlayerFinished(PlayerRef player)
-    {
-        // El primero que llega gana
-        if (ganador != PlayerRef.None) return;
-
-        ganador = player;
-        Debug.Log($"🏆 Ganador decidido por HOST: Player {ganador.AsIndex}");
-
-        Rpc_EndGame(ganador);
-    }
-
-    // 📢 El host avisa a TODOS quién ganó
     [Rpc(RpcSources.StateAuthority, RpcTargets.All)]
-    private void Rpc_EndGame(PlayerRef ganadorFinal)
+    public void Rpc_EndGame(int numGanador)
     {
-        bool soyGanador = Runner.LocalPlayer == ganadorFinal;
+        Debug.Log("Player Llamando: " + Runner.LocalPlayer.AsIndex);
+        // Aquí puedes manejar la lógica en el servidor, por ejemplo:
+        // - Cambiar escena sincronizadamente
+        // - Desconectar jugador
+        // - Otras acciones necesarias
 
-        Debug.Log(soyGanador
-            ? "🎉 GANASTE LA CARRERA"
-            : "💀 PERDISTE LA CARRERA");
+        // Ejemplo de carga de escena sincronizada
+        //Runner.LoadScene(Runner.SceneManager.GetSceneRef(SceneManager.GetSceneByBuildIndex(sceneIndex).name));
 
-        int sceneIndex = soyGanador ? 4 : 5;
+        int sceneIndex;
+        if (numGanador == Runner.LocalPlayer.AsIndex)
+        {
+            Debug.Log("gana");
+            sceneIndex = 4;
+            //Runner.UnloadScene(Runner.SceneManager.GetSceneRef(SceneManager.GetSceneByBuildIndex(3).name));
+            //Runner.LoadScene(Runner.SceneManager.GetSceneRef(SceneManager.GetSceneByBuildIndex(4).name));
+        }
+        else
+        {
+            Debug.Log("pierde");
+            sceneIndex = 5;
+        }
+
+        Debug.Log($"LeaveGame llamado por jugador {Runner.LocalPlayer.AsIndex} para cargar escena {sceneIndex}");
+
         SceneManager.LoadScene(sceneIndex);
+
+        // Desconectar al jugador que llamó (si es necesario)
+        Runner.Disconnect(Runner.LocalPlayer);
     }
+
+    /*
+    [Rpc(RpcSources.StateAuthority, RpcTargets.All)]
+    public void Rpc_EndGame(PlayerRef caller, int numGanador)
+    {
+        Debug.Log("Player Llamando: " + Runner.LocalPlayer.AsIndex);
+        // Aquí puedes manejar la lógica en el servidor, por ejemplo:
+        // - Cambiar escena sincronizadamente
+        // - Desconectar jugador
+        // - Otras acciones necesarias
+
+        // Ejemplo de carga de escena sincronizada
+        //Runner.LoadScene(Runner.SceneManager.GetSceneRef(SceneManager.GetSceneByBuildIndex(sceneIndex).name));
+
+        int sceneIndex;
+        if ( numGanador == Runner.LocalPlayer.AsIndex)
+        {
+            Debug.Log("gana");
+            sceneIndex = 4;
+            //Runner.UnloadScene(Runner.SceneManager.GetSceneRef(SceneManager.GetSceneByBuildIndex(3).name));
+            //Runner.LoadScene(Runner.SceneManager.GetSceneRef(SceneManager.GetSceneByBuildIndex(4).name));
+        }
+        else
+        {
+            Debug.Log("pierde");
+            sceneIndex = 5;
+        }
+
+        Debug.Log($"LeaveGame llamado por jugador {caller} para cargar escena {sceneIndex}");
+
+        SceneManager.LoadScene(sceneIndex);
+
+        // Desconectar al jugador que llamó (si es necesario)
+        Runner.Disconnect(caller);
+    }
+    */
 }
+

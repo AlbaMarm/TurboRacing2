@@ -24,6 +24,7 @@ public class VueltasController : NetworkBehaviour
     {
         if (HasStateAuthority)
         {
+            Debug.Log("Player: " + Runner.LocalPlayer.AsIndex);
             contador = 1;
         }
     }
@@ -99,7 +100,7 @@ public class VueltasController : NetworkBehaviour
             sceneIndex = 5;
         }
 
-        Debug.Log($"LeaveGame llamado por jugador {caller}}");
+        Debug.Log($"LeaveGame llamado por jugador {caller} para cargar escena {sceneIndex}");
 
         SceneManager.LoadScene(sceneIndex);
 

@@ -35,7 +35,7 @@ public class CarControllerMulti : NetworkBehaviour
         {
             controlVR = GameObject.FindGameObjectWithTag("ControlVR");
 
-            if (controlVR!=null)
+            if (controlVR != null)
             {
                 controlVR.transform.SetParent(this.transform);
                 controlVR.transform.position = this.transform.position;
@@ -87,6 +87,4 @@ public class CarControllerMulti : NetworkBehaviour
 
     }
 
-
-    
 }

@@ -144,7 +144,8 @@ public class CarControllerMulti : NetworkBehaviour
         // - Otras acciones necesarias
 
         // Ejemplo de carga de escena sincronizada
-        Runner.LoadScene(Runner.SceneManager.GetSceneRef(SceneManager.GetSceneByBuildIndex(sceneIndex).name));
+        //Runner.LoadScene(Runner.SceneManager.GetSceneRef(SceneManager.GetSceneByBuildIndex(sceneIndex).name));
+        SceneManager.LoadScene(sceneIndex);
 
         // Desconectar al jugador que llamó (si es necesario)
         Runner.Disconnect(caller);

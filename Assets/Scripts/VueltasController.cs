@@ -68,16 +68,51 @@ public class VueltasController : NetworkBehaviour
                     numGanador = Runner.LocalPlayer.AsIndex;
                     Debug.Log(numGanador);
                 }
-                Rpc_EndGame(Runner.LocalPlayer, numGanador);
+                //Rpc_EndGame(Runner.LocalPlayer, numGanador);
+                Rpc_EndGame(numGanador);
             }
         }
     }
 
+    [Rpc(RpcSources.StateAuthority, RpcTargets.All)]
+    public void Rpc_EndGame(int numGanador)
+    {
+        Debug.Log("Player Llamando: " + Runner.LocalPlayer.AsIndex);
+        // Aquí puedes manejar la lógica en el servidor, por ejemplo:
+        // - Cambiar escena sincronizadamente
+        // - Desconectar jugador
+        // - Otras acciones necesarias
 
+        // Ejemplo de carga de escena sincronizada
+        //Runner.LoadScene(Runner.SceneManager.GetSceneRef(SceneManager.GetSceneByBuildIndex(sceneIndex).name));
+
+        int sceneIndex;
+        if (numGanador == Runner.LocalPlayer.AsIndex)
+        {
+            Debug.Log("gana");
+            sceneIndex = 4;
+            //Runner.UnloadScene(Runner.SceneManager.GetSceneRef(SceneManager.GetSceneByBuildIndex(3).name));
+            //Runner.LoadScene(Runner.SceneManager.GetSceneRef(SceneManager.GetSceneByBuildIndex(4).name));
+        }
+        else
+        {
+            Debug.Log("pierde");
+            sceneIndex = 5;
+        }
+
+        Debug.Log($"LeaveGame llamado por jugador {Runner.LocalPlayer.AsIndex} para cargar escena {sceneIndex}");
+
+        SceneManager.LoadScene(sceneIndex);
+
+        // Desconectar al jugador que llamó (si es necesario)
+        Runner.Disconnect(Runner.LocalPlayer);
+    }
+
+    /*
     [Rpc(RpcSources.StateAuthority, RpcTargets.All)]
     public void Rpc_EndGame(PlayerRef caller, int numGanador)
     {
-
+        Debug.Log("Player Llamando: " + Runner.LocalPlayer.AsIndex);
         // Aquí puedes manejar la lógica en el servidor, por ejemplo:
         // - Cambiar escena sincronizadamente
         // - Desconectar jugador
@@ -107,5 +142,6 @@ public class VueltasController : NetworkBehaviour
         // Desconectar al jugador que llamó (si es necesario)
         Runner.Disconnect(caller);
     }
-
+    */
 }
+

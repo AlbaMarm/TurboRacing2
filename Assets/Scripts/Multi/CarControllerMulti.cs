@@ -117,7 +117,7 @@ public class CarControllerMulti : NetworkBehaviour
                 Debug.Log("pierde");
                 nextScene = 5;
             }
-            LeaveGame(Runner.LocalPlayer, nextScene);
+            Rpc_LeaveGame(Runner.LocalPlayer, nextScene);
         }
     }
 
@@ -131,10 +131,10 @@ public class CarControllerMulti : NetworkBehaviour
         SceneManager.LoadScene(nextScene);
     }*/
 
-    
 
-    [Rpc(RpcSources.All, RpcTargets.StateAuthority)]
-    public void LeaveGame(PlayerRef caller, int sceneIndex)
+
+    [Rpc(RpcSources.StateAuthority, RpcTargets.All)]
+    public void Rpc_LeaveGame(PlayerRef caller, int sceneIndex)
     {
         Debug.Log($"LeaveGame llamado por jugador {caller} para cargar escena {sceneIndex}");
 

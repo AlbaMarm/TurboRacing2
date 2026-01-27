@@ -82,59 +82,11 @@ public class CarControllerMulti : NetworkBehaviour
                     horizontalVelocity = horizontalVelocity.normalized * maxSpeed;
                     rb.Rigidbody.linearVelocity = new Vector3(horizontalVelocity.x, rb.Rigidbody.linearVelocity.y, horizontalVelocity.z);
                 }
-
             }
-
-            
-            ReadOnlyDictionary<string, SessionProperty> ganador = Runner.SessionInfo.Properties;
-
-            if (ganador.TryGetValue("Ganador", out SessionProperty data))
-            {
-                int numGanador =(int)data.PropertyValue;
-                if (numGanador != 0)//&& Runner.LocalPlayer.IsRealPlayer
-                {
-                    Rpc_EndGame(Runner.LocalPlayer, numGanador);
-                }
-            }
-
-
         }
 
     }
 
 
-    [Rpc(RpcSources.StateAuthority, RpcTargets.All)]
-    public void Rpc_EndGame(PlayerRef caller, int numGanador)
-    {
-
-        // Aquí puedes manejar la lógica en el servidor, por ejemplo:
-        // - Cambiar escena sincronizadamente
-        // - Desconectar jugador
-        // - Otras acciones necesarias
-
-        // Ejemplo de carga de escena sincronizada
-        //Runner.LoadScene(Runner.SceneManager.GetSceneRef(SceneManager.GetSceneByBuildIndex(sceneIndex).name));
-
-        int sceneIndex;
-        if (Runner.IsSceneAuthority && numGanador == Runner.LocalPlayer.AsIndex)
-        {
-            Debug.Log("gana");
-            sceneIndex = 4;
-            //Runner.UnloadScene(Runner.SceneManager.GetSceneRef(SceneManager.GetSceneByBuildIndex(3).name));
-            //Runner.LoadScene(Runner.SceneManager.GetSceneRef(SceneManager.GetSceneByBuildIndex(4).name));
-        }
-        else
-        {
-            Debug.Log("pierde");
-            sceneIndex = 5;
-        }
-
-        Debug.Log($"LeaveGame llamado por jugador {caller} para cargar escena {sceneIndex}");
-
-        SceneManager.LoadScene(sceneIndex);
-
-        // Desconectar al jugador que llamó (si es necesario)
-        Runner.Disconnect(caller);
-    }
     
 }

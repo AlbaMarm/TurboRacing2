@@ -82,28 +82,32 @@ public class CarControllerMulti : NetworkBehaviour
 
             }
 
-            /*
+            
             ReadOnlyDictionary<string, SessionProperty> ganador = Runner.SessionInfo.Properties;
 
             if (ganador.TryGetValue("Ganador", out SessionProperty data))
             {
                 int numGanador = (int)data.PropertyValue;
-                if (numGanador != 0 && Runner.LocalPlayer.IsRealPlayer)
+                if (numGanador != 0)//&& Runner.LocalPlayer.IsRealPlayer
                 {
+
+                    int nextScene;
                     if(Runner.IsSceneAuthority && numGanador == Runner.LocalPlayer.AsIndex)
                     {
                         Debug.Log("gana");
-                        Runner.UnloadScene(Runner.SceneManager.GetSceneRef(SceneManager.GetSceneByBuildIndex(3).name));
-                        Runner.LoadScene(Runner.SceneManager.GetSceneRef(SceneManager.GetSceneByBuildIndex(4).name));
+                        nextScene = 4;
+                        //Runner.UnloadScene(Runner.SceneManager.GetSceneRef(SceneManager.GetSceneByBuildIndex(3).name));
+                        //Runner.LoadScene(Runner.SceneManager.GetSceneRef(SceneManager.GetSceneByBuildIndex(4).name));
                     }
                     else
                     {
-                        Runner.UnloadScene(SceneRef.FromIndex(3));
-                        Runner.LoadScene(SceneRef.FromIndex(5));
                         Debug.Log("pierde");
+                        nextScene = 5;
                     }
+                    SceneManager.LoadScene(nextScene);
+                    Runner.Shutdown(); // async pero aquí vale llamarlo así
                 }
-            }*/
+            }
             
 
         }

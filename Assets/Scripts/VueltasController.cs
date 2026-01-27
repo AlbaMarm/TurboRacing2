@@ -70,7 +70,7 @@ public class VueltasController : NetworkBehaviour
 
                     Runner.SessionInfo.UpdateCustomProperties(propiedades);
 
-                    Runner.Despawn(this.Object);
+                    /*Runner.Despawn(this.Object);*/
                 }
             }
         }

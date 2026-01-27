@@ -2,6 +2,7 @@ using Fusion;
 using Fusion.Sockets;
 using System;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.Linq;
 using Unity.VRTemplate;
 using UnityEngine;
@@ -9,6 +10,7 @@ using UnityEngine.InputSystem;
 using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 using UnityEngine.XR;
+using static Unity.Collections.Unicode;
 
 public class GestorEventos : MonoBehaviour, INetworkRunnerCallbacks
 {
@@ -141,6 +143,8 @@ public class GestorEventos : MonoBehaviour, INetworkRunnerCallbacks
 
             LJC.listaSJ[runner.SessionInfo].Remove(player);
         }
+
+        
     }
     
     public void OnReliableDataProgress(NetworkRunner runner, PlayerRef player, ReliableKey key, float progress)

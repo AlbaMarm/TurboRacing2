@@ -1,5 +1,6 @@
 using Fusion;
 using System.Collections;
+using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using TMPro;
 using UnityEngine;
@@ -49,4 +50,29 @@ public class VueltasController : NetworkBehaviour
                haChocado = false;
            }
        }
+
+        public override void FixedUpdateNetwork()
+        {
+            if (HasStateAuthority && contador == 3) { 
+                ReadOnlyDictionary<string, SessionProperty> ganador = Runner.SessionInfo.Properties;
+
+                if (ganador.TryGetValue("Ganador", out SessionProperty data))
+                {
+                    int numGanador = (int)data.PropertyValue;
+                    if (numGanador == 0 && Runner.LocalPlayer.IsRealPlayer)
+                    {
+                        numGanador = Runner.LocalPlayer.AsIndex;
+                        Debug.Log(numGanador);
+                    }
+
+                    Dictionary<string, SessionProperty> propiedades = new Dictionary<string, SessionProperty>();
+                    propiedades.Add("Ganador", (SessionProperty)numGanador);
+
+                    Runner.SessionInfo.UpdateCustomProperties(propiedades);
+
+                    /*Runner.Despawn(this.Object);*/
+                }
+            }
+        }
+
     }

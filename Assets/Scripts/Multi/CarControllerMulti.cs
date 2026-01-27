@@ -1,10 +1,13 @@
 using Fusion;
 using Fusion.Addons.Physics;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using Unity.VRTemplate;
 using UnityEngine;
 using UnityEngine.XR;
 using static Unity.Collections.Unicode;
+using UnityEngine.SceneManagement;
+using System;
 
 public class CarControllerMulti : NetworkBehaviour
 {
@@ -79,7 +82,43 @@ public class CarControllerMulti : NetworkBehaviour
                 }
 
             }
+
+            
+            ReadOnlyDictionary<string, SessionProperty> ganador = Runner.SessionInfo.Properties;
+
+            if (ganador.TryGetValue("Ganador", out SessionProperty data))
+            {
+                int numGanador = (int)data.PropertyValue;
+                if (numGanador != 0)//&& Runner.LocalPlayer.IsRealPlayer
+                {
+
+                    int nextScene;
+                    if(Runner.IsSceneAuthority && numGanador == Runner.LocalPlayer.AsIndex)
+                    {
+                        Debug.Log("gana");
+                        nextScene = 4;
+                        //Runner.UnloadScene(Runner.SceneManager.GetSceneRef(SceneManager.GetSceneByBuildIndex(3).name));
+                        //Runner.LoadScene(Runner.SceneManager.GetSceneRef(SceneManager.GetSceneByBuildIndex(4).name));
+                    }
+                    else
+                    {
+                        Debug.Log("pierde");
+                        nextScene = 5;
+                    }
+                    SceneManager.LoadScene(nextScene);
+                    SceneManager.sceneLoaded += DesconectarRed;
+                }
+            }
+            
+
         }
+
+    }
+
+    private void DesconectarRed(Scene arg0, LoadSceneMode arg1)
+    {
+        Runner.Shutdown(); // async pero aquí vale llamarlo así
+        SceneManager.sceneLoaded -= DesconectarRed;
 
     }
 }

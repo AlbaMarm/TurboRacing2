@@ -7,6 +7,7 @@ using UnityEngine;
 using UnityEngine.XR;
 using static Unity.Collections.Unicode;
 using UnityEngine.SceneManagement;
+using System;
 
 public class CarControllerMulti : NetworkBehaviour
 {
@@ -105,12 +106,19 @@ public class CarControllerMulti : NetworkBehaviour
                         nextScene = 5;
                     }
                     SceneManager.LoadScene(nextScene);
-                    Runner.Shutdown(); // async pero aquí vale llamarlo así
+                    SceneManager.sceneLoaded += DesconectarRed;
                 }
             }
             
 
         }
+
+    }
+
+    private void DesconectarRed(Scene arg0, LoadSceneMode arg1)
+    {
+        Runner.Shutdown(); // async pero aquí vale llamarlo así
+        SceneManager.sceneLoaded -= DesconectarRed;
 
     }
 }

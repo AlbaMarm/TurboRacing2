@@ -9,6 +9,8 @@ using static Unity.Collections.Unicode;
 
 public class VueltasController : NetworkBehaviour
 {
+
+    public CarControllerMulti myCar;
     public TMP_Text textoContador;
     public bool haChocado;
 
@@ -17,6 +19,7 @@ public class VueltasController : NetworkBehaviour
 
     private void Awake()
     {
+        myCar = GetComponentInChildren<CarControllerMulti>();
         haChocado = false;
     }
 
@@ -24,7 +27,7 @@ public class VueltasController : NetworkBehaviour
     {
         if (HasStateAuthority)
         {
-            Debug.Log("Player: " + Runner.LocalPlayer.AsIndex);
+            //Debug.Log("Player: " + Runner.LocalPlayer.AsIndex);
             contador = 1;
         }
     }
@@ -54,45 +57,82 @@ public class VueltasController : NetworkBehaviour
         }
     }
 
+    //public override void FixedUpdateNetwork()
+    //{
+    //    if (HasInputAuthority && contador >= 3)
+    //    {
+    //        ReadOnlyDictionary<string, SessionProperty> ganador = Runner.SessionInfo.Properties;
+
+    //        if (ganador.TryGetValue("Ganador", out SessionProperty data))
+    //        {
+    //            int numGanador = (int)data.PropertyValue;
+
+    //            numGanador = Runner.LocalPlayer.AsIndex;
+
+
+    //            Debug.Log("Ganador: " + numGanador);
+
+
+    //            /*
+
+    //            Runner.SessionInfo.UpdateCustomProperties(propiedades);
+    //            if (numGanador == 0 && Runner.LocalPlayer.IsRealPlayer)
+    //            {
+    //                numGanador = Runner.LocalPlayer.AsIndex;
+    //                Debug.Log(numGanador);
+    //            }
+    //            //Rpc_EndGame(Runner.LocalPlayer, numGanador);
+    //            Rpc_EndGame(numGanador);*/
+    //        }
+    //    }
+    //}
+
+
     public override void FixedUpdateNetwork()
     {
-        if (HasStateAuthority && contador == 3)
-        {
-            ReadOnlyDictionary<string, SessionProperty> ganador = Runner.SessionInfo.Properties;
+        Debug.Log($"Soy el jugador {Runner.LocalPlayer.AsIndex}");
 
-            if (ganador.TryGetValue("Ganador", out SessionProperty data))
+        ReadOnlyDictionary<string, SessionProperty> ganador = Runner.SessionInfo.Properties;
+        if (ganador.TryGetValue("Ganador", out SessionProperty data))
+        {
+            int numGanador = (int)data.PropertyValue;
+
+            if (numGanador != 0)
             {
-                int numGanador = (int)data.PropertyValue;
-                if (numGanador == 0 && Runner.LocalPlayer.IsRealPlayer)
-                {
-                    numGanador = Runner.LocalPlayer.AsIndex;
-                    Debug.Log(numGanador);
-                }
-                //Rpc_EndGame(Runner.LocalPlayer, numGanador);
-                Rpc_EndGame(numGanador);
+                EndGame(numGanador);
+                return;
             }
-        }
+
+            //Solo el HOST puede comprobar quien ha ganado
+            if (HasStateAuthority)
+            {
+                if (contador >= 3)
+                {
+                    Dictionary<string, SessionProperty> propiedades = new Dictionary<string, SessionProperty>();
+                    propiedades.Add("Ganador", (SessionProperty)myCar.playerID);
+                    Runner.SessionInfo.UpdateCustomProperties(propiedades);
+                    //EndGame(numGanador);
+                    return;
+                }
+            }
+        } 
     }
 
-    [Rpc(RpcSources.StateAuthority, RpcTargets.All)]
+
+    [Rpc(RpcSources.StateAuthority, RpcTargets.InputAuthority)]
     public void Rpc_EndGame(int numGanador)
     {
+        //Debug.Log($"LeaveGame llamado por jugador {Runner.LocalPlayer.AsIndex} para cargar escena {sceneIndex}");
         Debug.Log("Player Llamando: " + Runner.LocalPlayer.AsIndex);
-        // Aquí puedes manejar la lógica en el servidor, por ejemplo:
-        // - Cambiar escena sincronizadamente
-        // - Desconectar jugador
-        // - Otras acciones necesarias
+        EndGame(numGanador);
+    }
 
-        // Ejemplo de carga de escena sincronizada
-        //Runner.LoadScene(Runner.SceneManager.GetSceneRef(SceneManager.GetSceneByBuildIndex(sceneIndex).name));
-
+    public void EndGame(int numGanador) {
         int sceneIndex;
         if (numGanador == Runner.LocalPlayer.AsIndex)
         {
             Debug.Log("gana");
             sceneIndex = 4;
-            //Runner.UnloadScene(Runner.SceneManager.GetSceneRef(SceneManager.GetSceneByBuildIndex(3).name));
-            //Runner.LoadScene(Runner.SceneManager.GetSceneRef(SceneManager.GetSceneByBuildIndex(4).name));
         }
         else
         {
@@ -100,12 +140,12 @@ public class VueltasController : NetworkBehaviour
             sceneIndex = 5;
         }
 
-        Debug.Log($"LeaveGame llamado por jugador {Runner.LocalPlayer.AsIndex} para cargar escena {sceneIndex}");
-
+        Debug.Log($"Ganador: {numGanador}. Cambio a escena {sceneIndex}");
+        Debug.Break();
         SceneManager.LoadScene(sceneIndex);
 
         // Desconectar al jugador que llamó (si es necesario)
-        Runner.Disconnect(Runner.LocalPlayer);
+        //Runner.Disconnect(Runner.LocalPlayer);
     }
 
     /*

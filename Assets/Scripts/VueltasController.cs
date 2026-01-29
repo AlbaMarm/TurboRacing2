@@ -117,7 +117,7 @@ public class VueltasController : NetworkBehaviour
     }
 
 
-    [Rpc(RpcSources.StateAuthority, RpcTargets.InputAuthority)]
+    [Rpc(RpcSources.StateAuthority, RpcTargets.All)]
     public void Rpc_EndGame(int numGanador)
     {
         Debug.Log("Player Llamando: " + Runner.LocalPlayer.AsIndex);

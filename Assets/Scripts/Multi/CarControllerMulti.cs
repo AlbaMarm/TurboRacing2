@@ -1,15 +1,7 @@
 using Fusion;
 using Fusion.Addons.Physics;
-using System;
-using System.Collections;
-using System.Collections.Generic;
-using System.Collections.ObjectModel;
-using Unity.Android.Gradle.Manifest;
-using Unity.VRTemplate;
 using UnityEngine;
-using UnityEngine.SceneManagement;
-using UnityEngine.XR;
-using static Unity.Collections.Unicode;
+
 
 public class CarControllerMulti : NetworkBehaviour
 {
@@ -24,7 +16,7 @@ public class CarControllerMulti : NetworkBehaviour
     private float defaultRotationY;
     private GameObject controlVR;
 
-    public int playerID=0;
+    public int playerID;
     
 
     void Start()

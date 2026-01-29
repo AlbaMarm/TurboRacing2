@@ -50,7 +50,7 @@ public class InicioController : MonoBehaviour, INetworkRunnerCallbacks
         }
 
         int sceneindex;
-        sceneindex = 1;
+        sceneindex = 0;
         SceneManager.LoadScene(sceneindex);
     }
 

@@ -56,7 +56,40 @@ public class VueltasController : NetworkBehaviour
 
     public override void FixedUpdateNetwork()
     {
-        if (HasStateAuthority && contador == 3)
+        if (HasStateAuthority && contador >= 3)
+        {
+            ReadOnlyDictionary<string, SessionProperty> ganador = Runner.SessionInfo.Properties;
+
+            if (ganador.TryGetValue("Ganador", out SessionProperty data))
+            {
+                int numGanador = (int)data.PropertyValue;
+
+                numGanador = Runner.LocalPlayer.AsIndex;
+
+                Dictionary<string, SessionProperty> propiedades = new Dictionary<string, SessionProperty>();
+                propiedades.Add("Ganador", (SessionProperty)numGanador);
+
+                Debug.Log("Ganador: " + numGanador);
+                
+                
+                /*
+
+                Runner.SessionInfo.UpdateCustomProperties(propiedades);
+                if (numGanador == 0 && Runner.LocalPlayer.IsRealPlayer)
+                {
+                    numGanador = Runner.LocalPlayer.AsIndex;
+                    Debug.Log(numGanador);
+                }
+                //Rpc_EndGame(Runner.LocalPlayer, numGanador);
+                Rpc_EndGame(numGanador);*/
+            }
+        }
+    }
+
+    /*
+     public override void FixedUpdateNetwork()
+    {
+        if (HasStateAuthority && contador >= 3)
         {
             ReadOnlyDictionary<string, SessionProperty> ganador = Runner.SessionInfo.Properties;
 
@@ -73,6 +106,7 @@ public class VueltasController : NetworkBehaviour
             }
         }
     }
+     */
 
     [Rpc(RpcSources.StateAuthority, RpcTargets.All)]
     public void Rpc_EndGame(int numGanador)

@@ -21,13 +21,14 @@ public class VueltasController : NetworkBehaviour
     {
         myCar = GetComponentInChildren<CarControllerMulti>();
         haChocado = false;
+        Debug.Log($"Soy el jugador {Runner.LocalPlayer.AsIndex}");
     }
 
     public override void Spawned()
     {
         if (HasStateAuthority)
         {
-            Debug.Log("Player: " + Runner.LocalPlayer.AsIndex);
+            //Debug.Log("Player: " + Runner.LocalPlayer.AsIndex);
             contador = 1;
         }
     }
@@ -109,7 +110,7 @@ public class VueltasController : NetworkBehaviour
                     Dictionary<string, SessionProperty> propiedades = new Dictionary<string, SessionProperty>();
                     propiedades.Add("Ganador", (SessionProperty)myCar.playerID);
                     Runner.SessionInfo.UpdateCustomProperties(propiedades);
-                    EndGame(numGanador);
+                    //EndGame(numGanador);
                     return;
                 }
             }
@@ -127,7 +128,7 @@ public class VueltasController : NetworkBehaviour
 
     public void EndGame(int numGanador) {
         int sceneIndex;
-        if (numGanador == myCar.playerID)
+        if (numGanador == Runner.LocalPlayer.AsIndex)
         {
             Debug.Log("gana");
             sceneIndex = 4;
@@ -139,6 +140,7 @@ public class VueltasController : NetworkBehaviour
         }
 
         Debug.Log($"Ganador: {numGanador}. Cambio a escena {sceneIndex}");
+        Debug.Break();
         SceneManager.LoadScene(sceneIndex);
 
         // Desconectar al jugador que llamó (si es necesario)

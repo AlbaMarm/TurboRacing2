@@ -108,6 +108,8 @@ public class VueltasController : NetworkBehaviour
                     Dictionary<string, SessionProperty> propiedades = new Dictionary<string, SessionProperty>();
                     propiedades.Add("Ganador", (SessionProperty)myCar.playerID);
                     Runner.SessionInfo.UpdateCustomProperties(propiedades);
+                    Rpc_EndGame(numGanador);
+                    return;
                 }
 
             }

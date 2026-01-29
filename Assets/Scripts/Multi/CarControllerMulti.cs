@@ -18,10 +18,12 @@ public class CarControllerMulti : NetworkBehaviour
     public float maxSpeed = 20f;
     public float turnSpeed = 1f;
     public float maxAngle = 3600.0f;
+    public GameObject playerVisuals;
 
     private NetworkRigidbody3D rb;
     private float defaultRotationY;
     private GameObject controlVR;
+    
 
     void Start()
     {
@@ -39,6 +41,11 @@ public class CarControllerMulti : NetworkBehaviour
             {
                 controlVR.transform.SetParent(this.transform);
                 controlVR.transform.position = this.transform.position;
+            }
+
+            if (playerVisuals != null)
+            {
+                playerVisuals.SetActive(false);
             }
         }
 

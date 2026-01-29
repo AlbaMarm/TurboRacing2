@@ -90,52 +90,46 @@ public class VueltasController : NetworkBehaviour
 
     public override void FixedUpdateNetwork()
     {
-        if(HasStateAuthority)
+        ReadOnlyDictionary<string, SessionProperty> ganador = Runner.SessionInfo.Properties;
+        if (ganador.TryGetValue("Ganador", out SessionProperty data))
         {
-            ReadOnlyDictionary<string, SessionProperty> ganador = Runner.SessionInfo.Properties;
+            int numGanador = (int)data.PropertyValue;
 
-            if (ganador.TryGetValue("Ganador", out SessionProperty data))
+            if (numGanador != 0)
             {
-                int numGanador = (int)data.PropertyValue;
+                EndGame(numGanador);
+                return;
+            }
 
-                if (numGanador != 0)
-                {
-                    Rpc_EndGame(numGanador);
-                    return;
-                }
-                else if (contador >= 3)
+            //Solo el HOST puede comprobar quien ha ganado
+            if (HasStateAuthority)
+            {
+                if (contador >= 3)
                 {
                     Dictionary<string, SessionProperty> propiedades = new Dictionary<string, SessionProperty>();
                     propiedades.Add("Ganador", (SessionProperty)myCar.playerID);
                     Runner.SessionInfo.UpdateCustomProperties(propiedades);
-                    Rpc_EndGame(numGanador);
+                    EndGame(numGanador);
                     return;
                 }
-
             }
-        }
+        } 
     }
 
 
-    [Rpc(RpcSources.StateAuthority, RpcTargets.All)]
+    [Rpc(RpcSources.StateAuthority, RpcTargets.InputAuthority)]
     public void Rpc_EndGame(int numGanador)
     {
         Debug.Log("Player Llamando: " + Runner.LocalPlayer.AsIndex);
-        // Aquí puedes manejar la lógica en el servidor, por ejemplo:
-        // - Cambiar escena sincronizadamente
-        // - Desconectar jugador
-        // - Otras acciones necesarias
+        EndGame(numGanador);
+    }
 
-        // Ejemplo de carga de escena sincronizada
-        //Runner.LoadScene(Runner.SceneManager.GetSceneRef(SceneManager.GetSceneByBuildIndex(sceneIndex).name));
-
+    public void EndGame(int numGanador) {
         int sceneIndex;
         if (numGanador == myCar.playerID)
         {
             Debug.Log("gana");
             sceneIndex = 4;
-            //Runner.UnloadScene(Runner.SceneManager.GetSceneRef(SceneManager.GetSceneByBuildIndex(3).name));
-            //Runner.LoadScene(Runner.SceneManager.GetSceneRef(SceneManager.GetSceneByBuildIndex(4).name));
         }
         else
         {

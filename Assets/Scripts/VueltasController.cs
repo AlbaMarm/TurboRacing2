@@ -57,37 +57,6 @@ public class VueltasController : NetworkBehaviour
         }
     }
 
-    //public override void FixedUpdateNetwork()
-    //{
-    //    if (HasInputAuthority && contador >= 3)
-    //    {
-    //        ReadOnlyDictionary<string, SessionProperty> ganador = Runner.SessionInfo.Properties;
-
-    //        if (ganador.TryGetValue("Ganador", out SessionProperty data))
-    //        {
-    //            int numGanador = (int)data.PropertyValue;
-
-    //            numGanador = Runner.LocalPlayer.AsIndex;
-
-
-    //            Debug.Log("Ganador: " + numGanador);
-
-
-    //            /*
-
-    //            Runner.SessionInfo.UpdateCustomProperties(propiedades);
-    //            if (numGanador == 0 && Runner.LocalPlayer.IsRealPlayer)
-    //            {
-    //                numGanador = Runner.LocalPlayer.AsIndex;
-    //                Debug.Log(numGanador);
-    //            }
-    //            //Rpc_EndGame(Runner.LocalPlayer, numGanador);
-    //            Rpc_EndGame(numGanador);*/
-    //        }
-    //    }
-    //}
-
-
     public override void FixedUpdateNetwork()
     {
         Debug.Log($"Soy el jugador {Runner.LocalPlayer.AsIndex}");
@@ -141,47 +110,10 @@ public class VueltasController : NetworkBehaviour
         }
 
         Debug.Log($"Ganador: {numGanador}. Cambio a escena {sceneIndex}");
-        Debug.Break();
         SceneManager.LoadScene(sceneIndex);
 
         // Desconectar al jugador que llamó (si es necesario)
         //Runner.Disconnect(Runner.LocalPlayer);
     }
-
-    /*
-    [Rpc(RpcSources.StateAuthority, RpcTargets.All)]
-    public void Rpc_EndGame(PlayerRef caller, int numGanador)
-    {
-        Debug.Log("Player Llamando: " + Runner.LocalPlayer.AsIndex);
-        // Aquí puedes manejar la lógica en el servidor, por ejemplo:
-        // - Cambiar escena sincronizadamente
-        // - Desconectar jugador
-        // - Otras acciones necesarias
-
-        // Ejemplo de carga de escena sincronizada
-        //Runner.LoadScene(Runner.SceneManager.GetSceneRef(SceneManager.GetSceneByBuildIndex(sceneIndex).name));
-
-        int sceneIndex;
-        if ( numGanador == Runner.LocalPlayer.AsIndex)
-        {
-            Debug.Log("gana");
-            sceneIndex = 4;
-            //Runner.UnloadScene(Runner.SceneManager.GetSceneRef(SceneManager.GetSceneByBuildIndex(3).name));
-            //Runner.LoadScene(Runner.SceneManager.GetSceneRef(SceneManager.GetSceneByBuildIndex(4).name));
-        }
-        else
-        {
-            Debug.Log("pierde");
-            sceneIndex = 5;
-        }
-
-        Debug.Log($"LeaveGame llamado por jugador {caller} para cargar escena {sceneIndex}");
-
-        SceneManager.LoadScene(sceneIndex);
-
-        // Desconectar al jugador que llamó (si es necesario)
-        Runner.Disconnect(caller);
-    }
-    */
 }
 

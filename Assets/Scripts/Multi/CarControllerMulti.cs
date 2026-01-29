@@ -23,6 +23,8 @@ public class CarControllerMulti : NetworkBehaviour
     private NetworkRigidbody3D rb;
     private float defaultRotationY;
     private GameObject controlVR;
+
+    public int playerID=0;
     
 
     void Start()

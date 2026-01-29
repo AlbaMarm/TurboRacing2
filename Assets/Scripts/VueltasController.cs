@@ -9,6 +9,8 @@ using static Unity.Collections.Unicode;
 
 public class VueltasController : NetworkBehaviour
 {
+
+    public CarControllerMulti myCar;
     public TMP_Text textoContador;
     public bool haChocado;
 
@@ -17,6 +19,7 @@ public class VueltasController : NetworkBehaviour
 
     private void Awake()
     {
+        myCar = GetComponentInChildren<CarControllerMulti>();
         haChocado = false;
     }
 
@@ -54,9 +57,40 @@ public class VueltasController : NetworkBehaviour
         }
     }
 
+    //public override void FixedUpdateNetwork()
+    //{
+    //    if (HasInputAuthority && contador >= 3)
+    //    {
+    //        ReadOnlyDictionary<string, SessionProperty> ganador = Runner.SessionInfo.Properties;
+
+    //        if (ganador.TryGetValue("Ganador", out SessionProperty data))
+    //        {
+    //            int numGanador = (int)data.PropertyValue;
+
+    //            numGanador = Runner.LocalPlayer.AsIndex;
+
+
+    //            Debug.Log("Ganador: " + numGanador);
+
+
+    //            /*
+
+    //            Runner.SessionInfo.UpdateCustomProperties(propiedades);
+    //            if (numGanador == 0 && Runner.LocalPlayer.IsRealPlayer)
+    //            {
+    //                numGanador = Runner.LocalPlayer.AsIndex;
+    //                Debug.Log(numGanador);
+    //            }
+    //            //Rpc_EndGame(Runner.LocalPlayer, numGanador);
+    //            Rpc_EndGame(numGanador);*/
+    //        }
+    //    }
+    //}
+
+
     public override void FixedUpdateNetwork()
     {
-        if (HasStateAuthority && contador >= 3)
+        if(HasStateAuthority)
         {
             ReadOnlyDictionary<string, SessionProperty> ganador = Runner.SessionInfo.Properties;
 
@@ -64,51 +98,24 @@ public class VueltasController : NetworkBehaviour
             {
                 int numGanador = (int)data.PropertyValue;
 
-                numGanador = Runner.LocalPlayer.AsIndex;
-
-                Dictionary<string, SessionProperty> propiedades = new Dictionary<string, SessionProperty>();
-                propiedades.Add("Ganador", (SessionProperty)numGanador);
-
-                Debug.Log("Ganador: " + numGanador);
-                
-                
-                /*
-
-                Runner.SessionInfo.UpdateCustomProperties(propiedades);
-                if (numGanador == 0 && Runner.LocalPlayer.IsRealPlayer)
+                if (numGanador != 0)
                 {
-                    numGanador = Runner.LocalPlayer.AsIndex;
-                    Debug.Log(numGanador);
+                    Rpc_EndGame(numGanador);
+                    return;
                 }
-                //Rpc_EndGame(Runner.LocalPlayer, numGanador);
-                Rpc_EndGame(numGanador);*/
+                else if (contador >= 3)
+                {
+                    Dictionary<string, SessionProperty> propiedades = new Dictionary<string, SessionProperty>();
+                    propiedades.Add("Ganador", (SessionProperty)myCar.playerID);
+                    Runner.SessionInfo.UpdateCustomProperties(propiedades);
+                }
+
             }
         }
     }
 
-    /*
-     public override void FixedUpdateNetwork()
-    {
-        if (HasStateAuthority && contador >= 3)
-        {
-            ReadOnlyDictionary<string, SessionProperty> ganador = Runner.SessionInfo.Properties;
 
-            if (ganador.TryGetValue("Ganador", out SessionProperty data))
-            {
-                int numGanador = (int)data.PropertyValue;
-                if (numGanador == 0 && Runner.LocalPlayer.IsRealPlayer)
-                {
-                    numGanador = Runner.LocalPlayer.AsIndex;
-                    Debug.Log(numGanador);
-                }
-                //Rpc_EndGame(Runner.LocalPlayer, numGanador);
-                Rpc_EndGame(numGanador);
-            }
-        }
-    }
-     */
-
-    [Rpc(RpcSources.StateAuthority, RpcTargets.All)]
+    [Rpc(RpcSources.StateAuthority, RpcTargets.InputAuthority)]
     public void Rpc_EndGame(int numGanador)
     {
         Debug.Log("Player Llamando: " + Runner.LocalPlayer.AsIndex);
@@ -121,7 +128,7 @@ public class VueltasController : NetworkBehaviour
         //Runner.LoadScene(Runner.SceneManager.GetSceneRef(SceneManager.GetSceneByBuildIndex(sceneIndex).name));
 
         int sceneIndex;
-        if (numGanador == Runner.LocalPlayer.AsIndex)
+        if (numGanador == myCar.playerID)
         {
             Debug.Log("gana");
             sceneIndex = 4;
@@ -139,7 +146,7 @@ public class VueltasController : NetworkBehaviour
         SceneManager.LoadScene(sceneIndex);
 
         // Desconectar al jugador que llamó (si es necesario)
-        Runner.Disconnect(Runner.LocalPlayer);
+        //Runner.Disconnect(Runner.LocalPlayer);
     }
 
     /*

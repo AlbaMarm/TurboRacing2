@@ -174,11 +174,13 @@ public class GestorEventos : MonoBehaviour, INetworkRunnerCallbacks
                 {
                     if (numJugador == 1)
                     {
+                        jugador1.GetComponentInChildren<CarControllerMulti>().playerID = 1;
                         NetworkObject p = runner.Spawn(jugador1, SpawnPoint1.transform.position, Quaternion.identity, pR);
                         LJC.listaSJ[runner.SessionInfo][pR] = p;
                     }
                     else
                     {
+                        jugador2.GetComponentInChildren<CarControllerMulti>().playerID = 2;
                         NetworkObject p = runner.Spawn(jugador2, SpawnPoint2.transform.position, Quaternion.identity, pR);
                         LJC.listaSJ[runner.SessionInfo][pR] = p;
                     }

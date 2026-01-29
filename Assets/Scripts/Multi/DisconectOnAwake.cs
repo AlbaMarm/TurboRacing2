@@ -20,6 +20,7 @@ public class DisconectOnAwake : MonoBehaviour, INetworkRunnerCallbacks
     {
         yield return new WaitForSecondsRealtime(waitTime);
         runner.Disconnect(runner.LocalPlayer);
+        Destroy(runner.gameObject);
     }
 
 

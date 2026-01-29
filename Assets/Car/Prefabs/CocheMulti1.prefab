@@ -128,7 +128,6 @@ MonoBehaviour:
   turnSpeed: 3
   maxAngle: 3600
   playerVisuals: {fileID: 4899939698879549579}
-  playerID: 1
 --- !u!65 &8258671325001372755
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -162,7 +161,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 523ff6a69f1638b44811b870fb744917, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::VueltasController
-  myCar: {fileID: 0}
   textoContador: {fileID: 5226359312411980457}
   haChocado: 0
   _contador: 0

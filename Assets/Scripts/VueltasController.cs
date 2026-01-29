@@ -120,6 +120,7 @@ public class VueltasController : NetworkBehaviour
     [Rpc(RpcSources.StateAuthority, RpcTargets.InputAuthority)]
     public void Rpc_EndGame(int numGanador)
     {
+        //Debug.Log($"LeaveGame llamado por jugador {Runner.LocalPlayer.AsIndex} para cargar escena {sceneIndex}");
         Debug.Log("Player Llamando: " + Runner.LocalPlayer.AsIndex);
         EndGame(numGanador);
     }
@@ -137,8 +138,7 @@ public class VueltasController : NetworkBehaviour
             sceneIndex = 5;
         }
 
-        Debug.Log($"LeaveGame llamado por jugador {Runner.LocalPlayer.AsIndex} para cargar escena {sceneIndex}");
-
+        Debug.Log($"Ganador: {numGanador}. Cambio a escena {sceneIndex}");
         SceneManager.LoadScene(sceneIndex);
 
         // Desconectar al jugador que llamó (si es necesario)

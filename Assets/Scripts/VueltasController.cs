@@ -21,7 +21,6 @@ public class VueltasController : NetworkBehaviour
     {
         myCar = GetComponentInChildren<CarControllerMulti>();
         haChocado = false;
-        Debug.Log($"Soy el jugador {Runner.LocalPlayer.AsIndex}");
     }
 
     public override void Spawned()
@@ -91,6 +90,8 @@ public class VueltasController : NetworkBehaviour
 
     public override void FixedUpdateNetwork()
     {
+        Debug.Log($"Soy el jugador {Runner.LocalPlayer.AsIndex}");
+
         ReadOnlyDictionary<string, SessionProperty> ganador = Runner.SessionInfo.Properties;
         if (ganador.TryGetValue("Ganador", out SessionProperty data))
         {

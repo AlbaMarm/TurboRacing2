@@ -16,9 +16,12 @@ public class InicioController : MonoBehaviour, INetworkRunnerCallbacks
     private void Awake()
     {
         red = FindAnyObjectByType<NetworkRunner>();
-        red.name = "TurboRacing";
-        red.ProvideInput = true;
-        red.AddCallbacks(this);
+        if (red){
+            red.name = "TurboRacing";
+            red.ProvideInput = true;
+            red.AddCallbacks(this);
+        }
+
         sceneManager = FindAnyObjectByType<NetworkSceneManagerDefault>();
 
         LJC = FindAnyObjectByType<ListaJugadoresController>();
@@ -41,7 +44,7 @@ public class InicioController : MonoBehaviour, INetworkRunnerCallbacks
 
     }
 
-    public async void Desconectar()
+    /*public async void Desconectar()
     {
         if (red != null && red.IsRunning)
         {
@@ -52,7 +55,8 @@ public class InicioController : MonoBehaviour, INetworkRunnerCallbacks
         int sceneindex;
         sceneindex = 0;
         SceneManager.LoadScene(sceneindex);
-    }
+    }*/
+
 
     public void OnConnectedToServer(NetworkRunner runner)
     {

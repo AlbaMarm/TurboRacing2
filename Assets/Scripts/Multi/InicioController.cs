@@ -21,6 +21,7 @@ public class InicioController : MonoBehaviour, INetworkRunnerCallbacks
             red.ProvideInput = true;
             red.AddCallbacks(this);
         }
+        if(red.IsRunning) red.Shutdown();
 
         sceneManager = FindAnyObjectByType<NetworkSceneManagerDefault>();
 

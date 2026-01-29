@@ -10,7 +10,7 @@ using static Unity.Collections.Unicode;
 
 public class DisconectOnAwake : MonoBehaviour, INetworkRunnerCallbacks
 {
-    float waitTime = 2f;
+    float waitTime = 0f;
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     public void OnSceneLoadDone(NetworkRunner runner)
     {

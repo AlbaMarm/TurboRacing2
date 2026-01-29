@@ -14,10 +14,7 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Scenes/UI/creditos.unity
     guid: a462f2d4bb4322945b14fcd04114e34f
-  - enabled: 0
-    path: Assets/Scenes/Pruevas temporales.unity
-    guid: 57e98371b976f3447984b6e068e31a7a
-  - enabled: 0
+  - enabled: 1
     path: Assets/Scenes/Circuito/PistaMulti.unity
     guid: d9678edea8dc30d4aa42bd4ae5c4ce3f
   - enabled: 1

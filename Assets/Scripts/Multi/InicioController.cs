@@ -115,7 +115,7 @@ public class InicioController : MonoBehaviour, INetworkRunnerCallbacks
                 LJC.listaSJ.Add(runner.SessionInfo, new Dictionary<PlayerRef, NetworkObject>());
             }
 
-            LJC.listaSJ[runner.SessionInfo][player] = null;
+            LJC.listaSJ[runner.SessionInfo].Add(player, null);
 
             if (runner.IsSceneAuthority)
             {

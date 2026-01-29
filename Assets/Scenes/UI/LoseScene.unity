@@ -331,7 +331,7 @@ MonoBehaviour:
       m_Calls:
       - m_Target: {fileID: 970418087}
         m_TargetAssemblyTypeName: InicioController, Assembly-CSharp
-        m_MethodName: Conectar
+        m_MethodName: Desconectar
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}

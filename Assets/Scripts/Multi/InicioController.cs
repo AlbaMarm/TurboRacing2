@@ -13,7 +13,6 @@ public class InicioController : MonoBehaviour, INetworkRunnerCallbacks
     private ListaJugadoresController LJC;
     private NetworkSceneManagerDefault sceneManager;
 
-
     private void Awake()
     {
         red = FindAnyObjectByType<NetworkRunner>();
@@ -41,6 +40,20 @@ public class InicioController : MonoBehaviour, INetworkRunnerCallbacks
         await red.StartGame(argumentos);
 
     }
+
+    public async void Desconectar()
+    {
+        if (red != null && red.IsRunning)
+        {
+            Debug.Log("Desconectando...");
+            await red.Shutdown();
+        }
+
+        int sceneindex;
+        sceneindex = 1;
+        SceneManager.LoadScene(sceneindex);
+    }
+
     public void OnConnectedToServer(NetworkRunner runner)
     {
 
@@ -102,7 +115,7 @@ public class InicioController : MonoBehaviour, INetworkRunnerCallbacks
                 LJC.listaSJ.Add(runner.SessionInfo, new Dictionary<PlayerRef, NetworkObject>());
             }
 
-            LJC.listaSJ[runner.SessionInfo].Add(player, null);
+            LJC.listaSJ[runner.SessionInfo][player] = null;
 
             if (runner.IsSceneAuthority)
             {

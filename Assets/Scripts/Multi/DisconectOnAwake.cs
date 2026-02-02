@@ -8,7 +8,7 @@ using UnityEngine;
 using UnityEngine.SceneManagement;
 using static Unity.Collections.Unicode;
 
-public class DisconectOnAwake : MonoBehaviour, INetworkRunnerCallbacks
+public class DisconectOnAwake : MonoBehaviour/*, INetworkRunnerCallbacks*/
 {
     private NetworkRunner red;
     float waitTime = 3f;
@@ -16,13 +16,17 @@ public class DisconectOnAwake : MonoBehaviour, INetworkRunnerCallbacks
     private void Awake()
     {
         red = FindAnyObjectByType<NetworkRunner>();
-        red.AddCallbacks(this);
+        //red.AddCallbacks(this);
         red.Shutdown();
+
+        ListaJugadoresController LJC = FindAnyObjectByType<ListaJugadoresController>();
+        Destroy(LJC);
+
         /*Debug.Log("Se desconecta");
         Destroy(red);*/
     }
     
-    
+    /*
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     public void OnSceneLoadDone(NetworkRunner runner)
     {
@@ -133,5 +137,5 @@ public class DisconectOnAwake : MonoBehaviour, INetworkRunnerCallbacks
  
     }
     #endregion
-    
+    */
 }

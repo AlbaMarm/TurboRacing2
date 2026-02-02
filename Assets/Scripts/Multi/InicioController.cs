@@ -21,6 +21,7 @@ public class InicioController : MonoBehaviour, INetworkRunnerCallbacks
             red.ProvideInput = true;
             red.AddCallbacks(this);
         }
+
         if(red.IsRunning) red.Shutdown();
 
         sceneManager = FindAnyObjectByType<NetworkSceneManagerDefault>();
@@ -36,7 +37,7 @@ public class InicioController : MonoBehaviour, INetworkRunnerCallbacks
         StartGameArgs argumentos = new StartGameArgs();
         argumentos.GameMode = GameMode.AutoHostOrClient;
         argumentos.SessionName = "Carrera";
-        argumentos.PlayerCount = 1;
+        argumentos.PlayerCount = 2;
         argumentos.SceneManager = sceneManager;
         argumentos.Scene = SceneRef.FromIndex(SceneManager.GetActiveScene().buildIndex);
         argumentos.SessionProperties = propiedades;

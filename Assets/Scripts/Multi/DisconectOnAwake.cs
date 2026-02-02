@@ -10,20 +10,36 @@ using static Unity.Collections.Unicode;
 
 public class DisconectOnAwake : MonoBehaviour, INetworkRunnerCallbacks
 {
-    float waitTime = 0f;
+    private NetworkRunner red;
+    float waitTime = 3f;
+
+    private void Awake()
+    {
+        red = FindAnyObjectByType<NetworkRunner>();
+        red.AddCallbacks(this);
+        red.Shutdown();
+        /*Debug.Log("Se desconecta");
+        Destroy(red);*/
+    }
+    
+    
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     public void OnSceneLoadDone(NetworkRunner runner)
     {
-        StartCoroutine(Disconect(runner));
+        //runner.Disconnect(runner.LocalPlayer);
+        //Debug.Log("Se desconecta");
+        //Destroy(runner.gameObject);
     }
+
+    
     IEnumerator Disconect(NetworkRunner runner)
     {
         yield return new WaitForSecondsRealtime(waitTime);
         runner.Disconnect(runner.LocalPlayer);
+        Debug.Log("Se desconecta");
         Destroy(runner.gameObject);
     }
-
-
+    
     #region Multi
     public void OnConnectedToServer(NetworkRunner runner)
     {
@@ -117,5 +133,5 @@ public class DisconectOnAwake : MonoBehaviour, INetworkRunnerCallbacks
  
     }
     #endregion
-
+    
 }

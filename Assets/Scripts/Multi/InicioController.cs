@@ -36,7 +36,7 @@ public class InicioController : MonoBehaviour, INetworkRunnerCallbacks
         StartGameArgs argumentos = new StartGameArgs();
         argumentos.GameMode = GameMode.AutoHostOrClient;
         argumentos.SessionName = "Carrera";
-        argumentos.PlayerCount = 2;
+        argumentos.PlayerCount = 1;
         argumentos.SceneManager = sceneManager;
         argumentos.Scene = SceneRef.FromIndex(SceneManager.GetActiveScene().buildIndex);
         argumentos.SessionProperties = propiedades;

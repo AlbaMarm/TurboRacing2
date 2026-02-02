@@ -377,62 +377,13 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!1 &373387266
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 373387268}
-  - component: {fileID: 373387267}
-  m_Layer: 0
-  m_Name: ListaJugadores
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!114 &373387267
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 373387266}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 2a5cba7ff038f5847b6b4c96f29b7512, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::ListaJugadoresController
---- !u!4 &373387268
-Transform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 373387266}
-  serializedVersion: 2
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 10.63013, y: 2.47889, z: 46.52044}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_ConstrainProportionsScale: 0
-  m_Children: []
-  m_Father: {fileID: 0}
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!4 &458873240 stripped
-Transform:
-  m_CorrespondingSourceObject: {fileID: -8679921383154817045, guid: f842d4d671b789f4a87633cde1ed0964, type: 3}
-  m_PrefabInstance: {fileID: 249248072}
-  m_PrefabAsset: {fileID: 0}
---- !u!43 &475272076
+--- !u!43 &341317290
 Mesh:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: WaterVolume--80732
+  m_Name: WaterVolume--30572
   serializedVersion: 12
   m_SubMeshes:
   - serializedVersion: 2
@@ -604,6 +555,55 @@ Mesh:
       - serializedVersion: 1
         m_IndexStart: 0
         m_IndexCount: 0
+--- !u!1 &373387266
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 373387268}
+  - component: {fileID: 373387267}
+  m_Layer: 0
+  m_Name: ListaJugadores
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &373387267
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 373387266}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2a5cba7ff038f5847b6b4c96f29b7512, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::ListaJugadoresController
+--- !u!4 &373387268
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 373387266}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 10.63013, y: 2.47889, z: 46.52044}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!4 &458873240 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: -8679921383154817045, guid: f842d4d671b789f4a87633cde1ed0964, type: 3}
+  m_PrefabInstance: {fileID: 249248072}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1001 &499146929
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -681,6 +681,10 @@ PrefabInstance:
     - target: {fileID: 4958670203684929165, guid: 51275c40f807c82429d3943081beaf49, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target
       value: 
+      objectReference: {fileID: 0}
+    - target: {fileID: 7168145745113408171, guid: 51275c40f807c82429d3943081beaf49, type: 3}
+      propertyPath: nextScene
+      value: Creditos Editado
       objectReference: {fileID: 0}
     - target: {fileID: 7822956944056194311, guid: 51275c40f807c82429d3943081beaf49, type: 3}
       propertyPath: m_LocalScale.x
@@ -1120,7 +1124,7 @@ PrefabInstance:
     - target: {fileID: 1711405934424851021, guid: 22069b8bdb9af264e9f342a0895310e5, type: 3}
       propertyPath: m_Mesh
       value: 
-      objectReference: {fileID: 475272076}
+      objectReference: {fileID: 341317290}
     - target: {fileID: 3296421933300332182, guid: 22069b8bdb9af264e9f342a0895310e5, type: 3}
       propertyPath: 'm_Materials.Array.data[0]'
       value: 

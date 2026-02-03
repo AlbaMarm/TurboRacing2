@@ -78,7 +78,8 @@ public class ContadorController : NetworkBehaviour
         }
         if(contador < 1)
         {
-            this.gameObject.SetActive(false);
+            if(HasStateAuthority)
+                this.gameObject.SetActive(false);
         }
     }
 }

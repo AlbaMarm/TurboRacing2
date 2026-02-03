@@ -15,7 +15,7 @@ public class ContadorController : NetworkBehaviour
     {
         if (HasStateAuthority)
         {
-            int contadorInicial = 3;
+            int contadorInicial = 4;
 
             Dictionary<string, SessionProperty> Propiedades = new Dictionary<string, SessionProperty>();
             Propiedades.Add("Contador", (SessionProperty)contadorInicial);

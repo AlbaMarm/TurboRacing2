@@ -69,6 +69,7 @@ public class VueltasController : NetworkBehaviour
             if (numGanador != 0)
             {
                 EndGame(numGanador);
+                
                 return;
             }
 
@@ -81,6 +82,7 @@ public class VueltasController : NetworkBehaviour
                     propiedades.Add("Ganador", (SessionProperty)myCar.playerID);
                     Runner.SessionInfo.UpdateCustomProperties(propiedades);
                     //EndGame(numGanador);
+
                     return;
                 }
             }
@@ -111,9 +113,12 @@ public class VueltasController : NetworkBehaviour
 
         Debug.Log($"Ganador: {numGanador}. Cambio a escena {sceneIndex}");
         SceneManager.LoadScene(sceneIndex);
-
+                
         // Desconectar al jugador que llamó (si es necesario)
         //Runner.Disconnect(Runner.LocalPlayer);
+
+        //Runner.Shutdown();
+
     }
 }
 

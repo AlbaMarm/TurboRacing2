@@ -2,6 +2,7 @@ using Fusion;
 using Fusion.Sockets;
 using System;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.Linq;
 using Unity.VRTemplate;
 using UnityEngine;
@@ -23,6 +24,7 @@ public class GestorEventos : MonoBehaviour, INetworkRunnerCallbacks
 
     public GameObject jugador1;
     public GameObject jugador2;
+
     private InputData inputData;
     
     private ListaJugadoresController LJC;
@@ -101,6 +103,22 @@ public class GestorEventos : MonoBehaviour, INetworkRunnerCallbacks
 
     public void OnInput(NetworkRunner runner, NetworkInput input)
     {
+        Boolean camina = false;
+
+        ReadOnlyDictionary<string, SessionProperty> c = runner.SessionInfo.Properties;
+
+        if (c.TryGetValue("Contador", out SessionProperty p))
+        {
+            int contador = (int)p.PropertyValue;
+
+            if (contador <= 0)
+            {
+                camina = true;
+            }
+        }
+
+        inputData.movimiento = camina ? 1 : 0;
+
         inputData.triggerPressed = false;
         inputData.knobValue = 0.0f;
 

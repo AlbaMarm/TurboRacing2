@@ -37,19 +37,17 @@ public class CarControllerMulti : NetworkBehaviour
                 controlVR.transform.position = this.transform.position;
                 controlVR.transform.Rotate(0.0f, -90.0f, 0.0f, Space.World);
             }
-
+                        
             if (playerVisuals != null)
             {
                 playerVisuals.SetActive(false);
             }
         }
 
-        /*
         if(HasStateAuthority)
         {
-            transform.Rotate(-90.0f, 0.0f, 0.0f, Space.World);
+            this.transform.Rotate(0.0f, 90.0f, 0.0f, Space.World);
         }
-        */
     }
 
     public override void FixedUpdateNetwork()
@@ -63,30 +61,31 @@ public class CarControllerMulti : NetworkBehaviour
         {
             if (GetInput(out InputData inputData))
             {
-                float targetSteeringAngle = (maxAngle * (inputData.knobValue)) * turnSpeed;
-
-                //Debug.Log(inputData.knobValue);
-                //Debug.Log(inputData.triggerPressed);
-
-                Quaternion targetRotation = Quaternion.Euler(0f, targetSteeringAngle + defaultRotationY, 0f);
-                rb.Rigidbody.MoveRotation(targetRotation);
-
-                // Control de aceleración con gatillo
-                if (inputData.triggerPressed)
+                if(inputData.movimiento > 0)
                 {
-                    rb.Rigidbody.AddForce((transform.forward * motorForce * Runner.DeltaTime) * 1);
-                }
+                    float targetSteeringAngle = (maxAngle * (inputData.knobValue)) * turnSpeed;
 
-                // Limitar la velocidad máxima (en magnitud)
-                Vector3 horizontalVelocity = new Vector3(rb.Rigidbody.linearVelocity.x, 0, rb.Rigidbody.linearVelocity.z);
-                if (horizontalVelocity.magnitude > maxSpeed)
-                {
-                    horizontalVelocity = horizontalVelocity.normalized * maxSpeed;
-                    rb.Rigidbody.linearVelocity = new Vector3(horizontalVelocity.x, rb.Rigidbody.linearVelocity.y, horizontalVelocity.z);
+                    //Debug.Log(inputData.knobValue);
+                    //Debug.Log(inputData.triggerPressed);
+
+                    Quaternion targetRotation = Quaternion.Euler(0f, targetSteeringAngle + defaultRotationY, 0f);
+                    rb.Rigidbody.MoveRotation(targetRotation);
+
+                    // Control de aceleración con gatillo
+                    if (inputData.triggerPressed)
+                    {
+                        rb.Rigidbody.AddForce((transform.forward * motorForce * Runner.DeltaTime) * 1);
+                    }
+
+                    // Limitar la velocidad máxima (en magnitud)
+                    Vector3 horizontalVelocity = new Vector3(rb.Rigidbody.linearVelocity.x, 0, rb.Rigidbody.linearVelocity.z);
+                    if (horizontalVelocity.magnitude > maxSpeed)
+                    {
+                        horizontalVelocity = horizontalVelocity.normalized * maxSpeed;
+                        rb.Rigidbody.linearVelocity = new Vector3(horizontalVelocity.x, rb.Rigidbody.linearVelocity.y, horizontalVelocity.z);
+                    }
                 }
             }
         }
-
     }
-
 }

@@ -33,6 +33,7 @@ public class InicioController : MonoBehaviour, INetworkRunnerCallbacks
     {
         Dictionary<string, SessionProperty> propiedades = new Dictionary<string, SessionProperty>();
         propiedades.Add("Ganador", (SessionProperty)0);
+        propiedades.Add("Contador", (SessionProperty)4);
 
         StartGameArgs argumentos = new StartGameArgs();
         argumentos.GameMode = GameMode.AutoHostOrClient;

@@ -38,23 +38,28 @@ public class ContadorController : NetworkBehaviour
     }
 
     // Update is called once per frame
-    void Update()
+    public override void FixedUpdateNetwork()
     {
-        if(HasStateAuthority)
+        //Debug.Log("He entrado al update");
+        if (HasStateAuthority)
         {
             ReadOnlyDictionary<string, SessionProperty> c = Runner.SessionInfo.Properties;
 
             if(c.TryGetValue("Contador", out SessionProperty p))
             {
                 contador = (int)p.PropertyValue;
+                //Debug.Log("He entrado al actualizar el valor de contador, con valor: " + contador);
             }
         }
     }
 
     IEnumerator cuentaAtras()
     {
-        while(contador>3)
+        //Debug.Log("He entrado a la cuenta atras");
+        //Debug.Log(contador);
+        while (contador>0)
         {
+            Debug.Log(contador);
             if (HasStateAuthority)
             {
                 ReadOnlyDictionary<string, SessionProperty> c = Runner.SessionInfo.Properties;
@@ -62,6 +67,7 @@ public class ContadorController : NetworkBehaviour
                 if (c.TryGetValue("Contador", out SessionProperty p))
                 {
                     int contadorAux = (int)p.PropertyValue;
+                    contadorAux--;
 
                     Dictionary<string, SessionProperty> Propiedades = new Dictionary<string, SessionProperty>();
                     Propiedades.Add("Contador", (SessionProperty)contadorAux);

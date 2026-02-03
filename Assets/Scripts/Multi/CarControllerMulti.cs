@@ -35,7 +35,8 @@ public class CarControllerMulti : NetworkBehaviour
             {
                 controlVR.transform.SetParent(this.transform);
                 controlVR.transform.position = this.transform.position;
-                controlVR.transform.Rotate(0.0f, -90.0f, 0.0f, Space.World);
+                if(playerID == 1)
+                    controlVR.transform.Rotate(0.0f, -90.0f, 0.0f, Space.World);
             }
                         
             if (playerVisuals != null)

@@ -63,7 +63,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 2147483647
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &4699983739813609860
 Transform:
   m_ObjectHideFlags: 0
@@ -856,6 +856,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: WaterBottle (1)
       objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: e5a1cfe3579f03d4f877e4393da84091, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects:
     - {fileID: 5050422055867433376, guid: e5a1cfe3579f03d4f877e4393da84091, type: 3}
@@ -1053,6 +1057,10 @@ PrefabInstance:
     - target: {fileID: 919132149155446097, guid: e2150b4f5d8429b4898b2f649806b27e, type: 3}
       propertyPath: m_Name
       value: pato (4)
+      objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: e2150b4f5d8429b4898b2f649806b27e, type: 3}
+      propertyPath: m_IsActive
+      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -2158,6 +2166,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: WaterBottle
       objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: e5a1cfe3579f03d4f877e4393da84091, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects:
     - {fileID: 5050422055867433376, guid: e5a1cfe3579f03d4f877e4393da84091, type: 3}
@@ -2447,6 +2459,10 @@ PrefabInstance:
     - target: {fileID: 919132149155446097, guid: 4ab7639976af0a84ea854ca2b0e7e39c, type: 3}
       propertyPath: m_Name
       value: arbol2
+      objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: 4ab7639976af0a84ea854ca2b0e7e39c, type: 3}
+      propertyPath: m_IsActive
+      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -2931,6 +2947,10 @@ PrefabInstance:
     - target: {fileID: 919132149155446097, guid: e2150b4f5d8429b4898b2f649806b27e, type: 3}
       propertyPath: m_Name
       value: pato (3)
+      objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: e2150b4f5d8429b4898b2f649806b27e, type: 3}
+      propertyPath: m_IsActive
+      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []

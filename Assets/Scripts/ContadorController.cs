@@ -76,6 +76,10 @@ public class ContadorController : NetworkBehaviour
             }
             yield return new WaitForSeconds(1);
         }
-        
+        if(contador < 1)
+        {
+            if(HasStateAuthority)
+                this.gameObject.SetActive(false);
+        }
     }
 }

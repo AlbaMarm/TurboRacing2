@@ -31,13 +31,17 @@ public class ContadorController : NetworkBehaviour
         {
             texto.text = contador.ToString();
         }
+        else if (contador < 0)
+        {
+            texto.text = "";
+        }
         else
         {
-            texto.text = "ADELANTE!!!!";
+            texto.text = "¡¡¡ADELANTE!!!!";
         }
     }
 
-    // Update is called once per frame
+    //Update is called once per frame
     public override void FixedUpdateNetwork()
     {
         //Debug.Log("He entrado al update");
@@ -57,7 +61,7 @@ public class ContadorController : NetworkBehaviour
     {
         //Debug.Log("He entrado a la cuenta atras");
         //Debug.Log(contador);
-        while (contador>0)
+        while (contador>=0)
         {
             Debug.Log(contador);
             if (HasStateAuthority)
@@ -75,11 +79,6 @@ public class ContadorController : NetworkBehaviour
                 }
             }
             yield return new WaitForSeconds(1);
-        }
-        if(contador < 1)
-        {
-            if(HasStateAuthority)
-                this.gameObject.SetActive(false);
         }
     }
 }

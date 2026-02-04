@@ -104,7 +104,7 @@ Este juego es multijugador y por lo tanto se permite competir online entre dos j
 
 ---
 
-## 🗲 Creditos
+## 🗲 Créditos
 
 Este videojuego ha sido realizado por:
 - Alba Marmolejo Ramos - [AlbaMarm](https://github.com/AlbaMarm)

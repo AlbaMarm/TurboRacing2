@@ -50,7 +50,7 @@ public class VueltasController : NetworkBehaviour
 
     IEnumerator recuperaChoque()
     {
-        yield return new WaitForSeconds(3);
+        yield return new WaitForSeconds(10);
         if (haChocado)
         {
             haChocado = false;

@@ -50,7 +50,10 @@ Durante la carrera el jugador controla el coche en VR mediante:
 - Acelerador
 - Mandos VR
 
-![Controles VR](images/manditos.jpg)
+<p align="center">
+  <img src="images/manditos.jpg" alt="Controles VR" width="400">
+</p>
+
 
 Esta sería la escena a visualizar:
 
